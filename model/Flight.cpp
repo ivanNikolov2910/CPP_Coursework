@@ -9,6 +9,10 @@ Flight::Flight(Type type, string id, string destination, unsigned time, unsigned
     this->destination = destination;
 }
 
+Flight::Flight() {
+
+}
+
 Flight::~Flight() {
 
 }
@@ -47,4 +51,6 @@ ResultCode validateId(string flightId) {
     }
     return validation_error;
 }
+
+
 

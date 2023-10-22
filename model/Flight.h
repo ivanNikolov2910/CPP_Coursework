@@ -24,6 +24,7 @@ private:
 
 public:
     Flight(Type type, string id, string destination, unsigned time, unsigned distance);
+    Flight();
 
     virtual ~Flight();
 
@@ -48,7 +49,11 @@ public:
     }
 
     friend std::ostream &operator<<(std::ostream &out, const Flight &obj) {
-        out << obj.id << "\n" << obj.type << "\n" << obj.destination << obj.time << "\n" << obj.distance << std::endl;
+        out << obj.id << "\n"
+            << obj.type << "\n"
+            << obj.destination << "\n"
+            << obj.time << "\n"
+            << obj.distance << "\n";
         return out;
     }
 

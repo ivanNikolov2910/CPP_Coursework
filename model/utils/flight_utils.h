@@ -5,4 +5,6 @@
 
 ResultCode createFlights(unsigned count = 1);
 
+ResultCode listFlights(std::vector<Flight> *flights);
+
 #endif //COURSEWORK_FLIGHT_UTILS_H

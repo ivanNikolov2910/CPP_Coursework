@@ -16,6 +16,7 @@ void managingFlights() {
 
         unsigned count;
         ResultCode res;
+        std::vector<Flight> flights;
 
         switch (cmd) {
             case '1':
@@ -31,7 +32,13 @@ void managingFlights() {
                 cout << "Managing planes..." << endl;
                 break;
             case '3':
-                cout << "Managing staff..." << endl;
+                res = listFlights(&flights);
+                if (res != success) {
+                    cout << "Changes are not saved" << endl;
+                }
+                for (Flight &f: flights) {
+                    std::cout << f;
+                }
                 break;
             case '4':
                 return;

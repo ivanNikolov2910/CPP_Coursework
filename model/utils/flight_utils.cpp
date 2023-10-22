@@ -2,6 +2,25 @@
 #include "../../constants/constants.h"
 #include "../Flight.h"
 
+ResultCode listFlights(std::vector<Flight> *flights) {
+    std::ifstream file(FLIGHT_FILE_PATH);
+    if (!file) {
+        std::cerr << "Failed to open the file." << std::endl;
+        return internal_error;
+    }
+
+    while (file) {
+        Flight newFlight;
+        file >> newFlight;
+        if (file) {
+            flights->push_back(newFlight);
+        }
+    }
+
+    return success;
+}
+
+
 ResultCode createFlights(unsigned count = 1) {
     std::vector<Flight> flights;
     for (unsigned i = 0; i < count; ++i) {
@@ -17,6 +36,7 @@ ResultCode createFlights(unsigned count = 1) {
             if (validateId(id) == success) {
                 break;
             }
+            // TODO check if exists and if override??
             std::cout << "Flight id is not valid, try again" << std::endl;
         }
 
@@ -46,19 +66,18 @@ ResultCode createFlights(unsigned count = 1) {
 
     std::fstream file;
 
-    file.open("flights", std::fstream::in | std::fstream::out | std::fstream::app);
+    file.open(FLIGHT_FILE_PATH, std::fstream::app);
 
     if (!file) {
-        file.open(FLIGHT_FILE_PATH);
-        std::cerr << "Failed to open the file." << std::endl;
+        std::cout << "Failed to open the file." << std::endl;
         return internal_error;
     }
 
     for (const Flight &flight: flights) {
-        if (std::find(flights.begin(), flights.end(), flight) == flights.end()) {
-            file << flight;
-        }
+        file << flight;
     }
+
+    file.close();
 
     std::cout << "Flights added successfully." << std::endl;
     return success;
