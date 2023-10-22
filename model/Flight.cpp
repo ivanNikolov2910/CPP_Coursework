@@ -45,8 +45,19 @@ Type Flight::getType() const {
     return type;
 }
 
+void Flight::setDistance(unsigned int distance) {
+    Flight::distance = distance;
+}
+
 ResultCode validateId(string flightId) {
     if (std::regex_match(flightId, FLIGHT_ID_PATTER)) {
+        return success;
+    }
+    return validation_error;
+}
+
+ResultCode validateDestination(string validateDestination) {
+    if (std::regex_match(validateDestination, BASE_CITY_NAME)) {
         return success;
     }
     return validation_error;

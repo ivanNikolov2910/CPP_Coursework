@@ -7,7 +7,9 @@ add_executable(Coursework main.cpp
         model/Flight.cpp
         model/Flight.h
         constants/constants.h
-        engine/flight/flight.cpp
-        engine/flight/flight.h
-        model/utils/flight_utils.cpp
+        engine/flight/FlightEngine.cpp
+        engine/flight/FlightEngine.h
+        model/utils/FlightUtils.cpp
+        model/Plane.cpp
+        model/Plane.h
 )

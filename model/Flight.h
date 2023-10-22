@@ -8,7 +8,9 @@
 
 using std::string, std::regex;
 
-ResultCode validateId(string validateId);
+ResultCode validateId(string);
+
+ResultCode validateDestination(string);
 
 enum Type {
     cargo = 0,
@@ -24,11 +26,14 @@ private:
 
 public:
     Flight(Type type, string id, string destination, unsigned time, unsigned distance);
+
     Flight();
 
     virtual ~Flight();
 
-    friend ResultCode validateId(string validateId);
+    friend ResultCode validateId(string);
+
+    friend ResultCode validateDestination(string);
 
     const string &getId() const;
 
@@ -41,6 +46,8 @@ public:
     void setTime(unsigned int time);
 
     unsigned int getDistance() const;
+
+    void setDistance(unsigned int distance);
 
     Type getType() const;
 

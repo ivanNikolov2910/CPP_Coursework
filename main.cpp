@@ -1,5 +1,5 @@
 #include <iostream>
-#include "engine/flight/flight.h"
+#include "engine/flight/FlightEngine.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ int main() {
 
         switch (cmd) {
             case '1':
-                managingFlights();
+                ManagingFlights();
                 break;
             case '2':
                 cout << "Managing planes..." << endl;
