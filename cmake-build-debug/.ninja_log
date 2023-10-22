@@ -1,0 +1,22 @@
+# ninja log v5
+0	194	7196687000731180	build.ninja	cc2250552e388189
+2	302	7196659834266548	CMakeFiles/Coursework.dir/main.cpp.obj	3e78f529d0d75839
+2	1915	7196632355956043	CMakeFiles/Coursework.dir/model/impl/Flight.cpp.obj	42c3cbbd47604e6d
+309	1353	7196659844728437	Coursework.exe	e975350dfb04f0eb
+6	297	7196659834206281	CMakeFiles/Coursework.dir/engine/flight/flight.cpp.obj	e44048d36350d722
+2	1869	7196696916857661	CMakeFiles/Coursework.dir/main.cpp.obj	3e78f529d0d75839
+12	1888	7196696917059613	CMakeFiles/Coursework.dir/engine/flight/flight.cpp.obj	e44048d36350d722
+17	1955	7196696917729869	CMakeFiles/Coursework.dir/model/utils/flight_utils.cpp.obj	8df7fc30fa28e32d
+7	2189	7196696920033268	CMakeFiles/Coursework.dir/model/Flight.cpp.obj	f4fa653aae86edd1
+2189	4990	7196696948048024	Coursework.exe	f27f99ac457e41d7
+2	1638	7196698960345206	CMakeFiles/Coursework.dir/model/utils/flight_utils.cpp.obj	8df7fc30fa28e32d
+1638	4243	7196698986357739	Coursework.exe	f27f99ac457e41d7
+5	1893	7196703857346553	CMakeFiles/Coursework.dir/engine/flight/flight.cpp.obj	e44048d36350d722
+2	1911	7196703857543342	CMakeFiles/Coursework.dir/main.cpp.obj	3e78f529d0d75839
+15	1950	7196703857931257	CMakeFiles/Coursework.dir/model/utils/flight_utils.cpp.obj	8df7fc30fa28e32d
+10	2206	7196703860472553	CMakeFiles/Coursework.dir/model/Flight.cpp.obj	f4fa653aae86edd1
+2206	4716	7196703885570979	Coursework.exe	f27f99ac457e41d7
+2	1692	7196706752987313	CMakeFiles/Coursework.dir/model/utils/flight_utils.cpp.obj	8df7fc30fa28e32d
+1693	4370	7196706779732078	Coursework.exe	f27f99ac457e41d7
+2	1664	7196707418291168	CMakeFiles/Coursework.dir/model/utils/flight_utils.cpp.obj	8df7fc30fa28e32d
+1664	4315	7196707444797326	Coursework.exe	f27f99ac457e41d7
