@@ -1,7 +1,4 @@
 #include <fstream>
-#include "../../constants/constants.h"
-#include "../Flight.h"
-
 
 Flight readFlightData(const std::vector<Flight> &flights);
 
@@ -31,7 +28,7 @@ ResultCode rewriteFlights(const std::vector<Flight> &flights) {
 ResultCode ListFlights(std::vector<Flight> *flights) {
     std::ifstream file(FLIGHT_FILE_PATH);
     if (!file) {
-        std::cerr << "Failed to open the file." << std::endl;
+        std::cout << "Failed to open the file." << std::endl;
         return internal_error;
     }
 
@@ -128,7 +125,7 @@ Flight readFlightData(const std::vector<Flight> &flights) {
         std::cout << "Enter flight id: ";
         std::cin >> id;
 
-        if (validateId(id) != success) {
+        if (validateId(id, FLIGHT_ID_PATTER) != success) {
             std::cout << "Flight id is not valid, try again" << std::endl;
             continue;
         }
@@ -196,7 +193,6 @@ ResultCode appendFlightsToFile(const std::vector<Flight> &flights) {
 
     return success;
 }
-
 
 ResultCode updateFlightData(Flight &flight) {
     char cmd;

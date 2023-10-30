@@ -5,10 +5,9 @@
 #include <regex>
 #include <iostream>
 #include "../constants/constants.h"
+#include "./utils/Validation.cpp"
 
 using std::string, std::regex;
-
-ResultCode validateId(string);
 
 ResultCode validateDestination(string);
 
@@ -30,8 +29,6 @@ public:
     Flight();
 
     virtual ~Flight();
-
-    friend ResultCode validateId(string);
 
     friend ResultCode validateDestination(string);
 

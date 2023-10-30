@@ -1,5 +1,6 @@
 #include <iostream>
-#include "engine/flight/FlightEngine.h"
+#include "engine/FlightEngine.cpp"
+#include "engine/PlaneEngine.cpp"
 
 using namespace std;
 
@@ -11,22 +12,26 @@ int main() {
              << "1. Manage flights" << endl
              << "2. Manage planes" << endl
              << "3. Manage staff" << endl
-             << "4. Exit" << endl
+             << "4. Manage runways" << endl
+             << "5. Exit" << endl
              << endl
              << "Enter option: ";
         cin >> cmd;
 
         switch (cmd) {
             case '1':
-                ManagingFlights();
+                ManageFlights();
                 break;
             case '2':
-                cout << "Managing planes..." << endl;
+                ManagePlanes();
                 break;
             case '3':
                 cout << "Managing staff..." << endl;
                 break;
             case '4':
+                cout << "Managing runways..." << endl;
+                break;
+            case '5':
                 cout << "Exiting..." << endl;
                 return 0;
             default:

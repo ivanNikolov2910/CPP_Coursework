@@ -1,8 +1,10 @@
-#include "FlightEngine.h"
+#include <iostream>
+#include "../model/Flight.h"
+#include "../model/utils/FlightUtils.cpp"
 
 using std::cout, std::endl, std::cin;
 
-void ManagingFlights() {
+void ManageFlights() {
     char cmd;
     std::cout << "Managing flights..." << std::endl;
     while (true) {
