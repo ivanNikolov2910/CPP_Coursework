@@ -12,8 +12,6 @@ add_executable(Coursework main.cpp
         model/utils/FlightUtils.cpp
         model/Plane.cpp
         model/Plane.h
-        model/submodels/Expenses.cpp
-        model/submodels/Expenses.h
         model/CargoPlane.cpp
         model/CargoPlane.h
         model/AirlinePlane.cpp

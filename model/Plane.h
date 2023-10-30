@@ -10,8 +10,28 @@ class Plane {
 private:
     string manufacturer, brand;
     int runwayLength;
-    Expenses expenses;
-};
+    double fuelPerKilometer;
 
+protected:
+    Plane(const string &manufacturer, const string &brand, int runwayLength, double fuelPerKilometer);
+
+    virtual ~Plane();
+
+    const string &getManufacturer() const;
+
+    void setManufacturer(const string &manufacturer);
+
+    const string &getBrand() const;
+
+    void setBrand(const string &brand);
+
+    int getRunwayLength() const;
+
+    void setRunwayLength(int runwayLength);
+
+    double getFuelPerKilometer() const;
+
+    void setFuelPerKilometer(double fuelPerKilometer);
+};
 
 #endif //COURSEWORK_PLANE_H
