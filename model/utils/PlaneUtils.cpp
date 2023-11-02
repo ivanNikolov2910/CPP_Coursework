@@ -1,5 +1,7 @@
 #include <iostream>
 #include "../Plane.h"
+#include "../CargoPlane.h"
+#include "../PassengerPlane.h"
 
 Plane readPlaneData(const std::vector<Plane> &);
 
@@ -137,14 +139,14 @@ Plane readPlaneData(const std::vector<Plane> &planes) {
         cin >> passengerSeats;
     }
 
-    Plane newPlane(id, manufacturer, brand, runwayLength, fuelPerKilometer);
+    Plane *newPlane;
     if (cargoWeight > 0) {
-        newPlane.setCargoWeight(cargoWeight);
+        newPlane = new CargoPlane(id, manufacturer, brand, runwayLength, fuelPerKilometer, cargoWeight);
     } else {
-        newPlane.setBusinessSeats(businessSeats);
-        newPlane.setPassengerSeats(passengerSeats);
+        newPlane = new PassengerPlane(id, manufacturer, brand, runwayLength, fuelPerKilometer, businessSeats,
+                                      passengerSeats);
     }
-    return newPlane;
+    return *newPlane;
 }
 
 ResultCode appendPlanesToFile(const std::vector<Plane> &planes) {

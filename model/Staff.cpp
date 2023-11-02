@@ -9,9 +9,9 @@ Staff::Staff(const string &id, const string &name, const string &family, StaffPo
     Staff::salary = salary;
 }
 
-Staff::~Staff() {
+Staff::Staff() {}
 
-}
+Staff::~Staff() {}
 
 const string &Staff::getId() const {
     return id;
@@ -52,3 +52,6 @@ double Staff::getSalary() const {
 void Staff::setSalary(double salary) {
     Staff::salary = salary;
 }
+
+
+

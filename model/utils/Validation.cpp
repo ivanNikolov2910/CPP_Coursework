@@ -1,6 +1,6 @@
 #include "../../constants/constants.h"
 
-ResultCode validateId(string id, std::regex reg) {
+ResultCode validateId(const string &id, const regex &reg) {
     if (std::regex_match(id, reg)) {
         return success;
     }

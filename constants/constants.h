@@ -13,6 +13,7 @@ const regex BASE_CITY_NAME("^(?:[A-Z][a-z]*[\\s-]?){1,3}(?:[A-Z][a-z]*)?$");
 const string FLIGHT_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\flights)";
 const string PLANE_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\planes)";
 const string RUNWAY_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\runways)";
+const string STAFF_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\staff)";
 
 
 enum ResultCode {

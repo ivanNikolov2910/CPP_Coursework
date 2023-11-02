@@ -1,6 +1,7 @@
 #include <iostream>
 #include "engine/FlightEngine.cpp"
 #include "engine/PlaneEngine.cpp"
+#include "engine/StaffEngine.cpp"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ int main() {
                 ManagePlanes();
                 break;
             case '3':
-                cout << "Managing staff..." << endl;
+                ManageStaff();
                 break;
             case '4':
                 cout << "Managing runways..." << endl;

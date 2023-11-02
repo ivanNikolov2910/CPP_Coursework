@@ -61,7 +61,7 @@ ResultCode CreateFlights(unsigned count) {
     return success;
 }
 
-ResultCode UpdateFlights(std::string id) {
+ResultCode UpdateFlights(const string &id) {
     std::vector<Flight> flights;
     ResultCode res = ListFlights(&flights);
     if (res != success) {
@@ -89,7 +89,7 @@ ResultCode UpdateFlights(std::string id) {
     return rewriteFlights(flights);
 }
 
-ResultCode DeleteFlights(std::string id) {
+ResultCode DeleteFlights(const string &id) {
     std::vector<Flight> flights;
     ResultCode res = ListFlights(&flights);
     if (res != success) {
@@ -173,7 +173,7 @@ Flight readFlightData(const std::vector<Flight> &flights) {
     std::cout << "Enter distance in km: ";
     std::cin >> distance;
 
-    return Flight(type, id, destination, time, distance);
+    return *new Flight(type, id, destination, time, distance);
 }
 
 ResultCode appendFlightsToFile(const std::vector<Flight> &flights) {

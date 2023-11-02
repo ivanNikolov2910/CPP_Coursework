@@ -2,7 +2,6 @@
 #define COURSEWORK_PLANE_H
 
 #include <string>
-#include "submodels/Expenses.h"
 
 using std::string;
 
@@ -11,9 +10,6 @@ private:
     string id, manufacturer, brand;
     int runwayLength;
     double fuelPerKilometer;
-
-    int businessSeats, passengerSeats;
-    int cargoWeight;
 
 public:
     Plane(const string &id, const string &manufacturer, const string &brand, int runwayLength, double fuelPerKilometer)
@@ -28,11 +24,7 @@ public:
 
     const string &getManufacturer() const;
 
-    void setManufacturer(const string &manufacturer);
-
     const string &getBrand() const;
-
-    void setBrand(const string &brand);
 
     int getRunwayLength() const;
 
@@ -42,18 +34,6 @@ public:
 
     void setFuelPerKilometer(double fuelPerKilometer);
 
-    int getBusinessSeats() const;
-
-    void setBusinessSeats(int businessSeats);
-
-    int getPassengerSeats() const;
-
-    void setPassengerSeats(int passengerSeats);
-
-    int getCargoWeight() const;
-
-    void setCargoWeight(int cargoWeight);
-
     bool operator==(const Plane &other) const {
         return id == other.id;
     }
@@ -62,22 +42,21 @@ public:
         out << obj.id << "\n"
             << obj.manufacturer << "\n"
             << obj.brand << "\n"
-            << obj.fuelPerKilometer << "\n"
-            << obj.cargoWeight << "\n"
-            << obj.passengerSeats << "\n"
-            << obj.businessSeats << "\n";
+            << obj.runwayLength << "\n"
+            << obj.fuelPerKilometer << "\n";
         return out;
     }
 
     friend std::istream &operator>>(std::istream &in, Plane &obj) {
+        string rl, fpk;
         in >> obj.id;
         in >> obj.manufacturer;
         in >> obj.brand;
-        in >> obj.fuelPerKilometer;
-        in >> obj.cargoWeight;
-        in >> obj.passengerSeats;
-        in >> obj.businessSeats;
+        in >> rl;
+        in >> fpk;
 
+        obj.setRunwayLength(std::stoi(rl));
+        obj.setFuelPerKilometer(std::stoi(fpk));
         return in;
     }
 };
