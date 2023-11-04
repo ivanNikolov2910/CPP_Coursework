@@ -11,4 +11,8 @@ add_executable(Coursework main.cpp
         model/PassengerPlane.h
         model/Staff.h
         engine/StaffEngine.cpp
-        model/utils/StaffUtils.cpp)
+        model/utils/StaffUtils.cpp
+        engine/RunwayEngine.cpp
+        model/utils/RunwayUtils.cpp
+        engine/flights-options/FlightsOptions.cpp
+)

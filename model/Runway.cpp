@@ -21,4 +21,4 @@ void Runway::setLength(int length) {
     Runway::length = length;
 }
 
-
+Runway::Runway() {}

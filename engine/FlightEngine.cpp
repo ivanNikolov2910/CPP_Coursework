@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../model/Flight.h"
 #include "../model/utils/FlightUtils.cpp"
+#include "./flights-options/FlightsOptions.cpp"
 
 using std::cout, std::endl, std::cin;
 
@@ -12,7 +13,8 @@ void ManageFlights() {
              << "2. Update flights by id" << endl
              << "3. Delete flights by id" << endl
              << "4. List flights" << endl
-             << "5. Return to main menu" << endl
+             << "5. Detailed flights menu" << endl
+             << "6. Return to main menu" << endl
              << endl
              << "Enter option: ";
         cin >> cmd;
@@ -53,7 +55,7 @@ void ManageFlights() {
 
                 res = ListFlights(&flights);
                 if (res != success) {
-                    cout << "Changes are not saved" << endl;
+                    cout << "Could not list flights" << endl;
                 }
                 for (Flight &f: flights) {
                     std::cout << "Flight: " << std::endl;
@@ -62,6 +64,21 @@ void ManageFlights() {
                 }
                 break;
             case '5':
+                cout << "Detailed Flights Menu" << endl;
+                res = ListFlights(&flights);
+                if (res != success) {
+                    cout << "Could not list flights" << endl;
+                }
+                if (!flights.empty()) {
+                    res = FlightsManagingOptions(&flights);
+                    if (res != success) {
+                        cout << "Changes are not saved" << endl;
+                    }
+                } else {
+                    cout << "No flights for detailed options" << endl;
+                }
+                break;
+            case '6':
                 return;
             default:
                 cout << "Invalid option!" << endl;

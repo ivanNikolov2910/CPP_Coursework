@@ -2,6 +2,7 @@
 #include "engine/FlightEngine.cpp"
 #include "engine/PlaneEngine.cpp"
 #include "engine/StaffEngine.cpp"
+#include "engine/RunwayEngine.cpp"
 
 using namespace std;
 
@@ -30,7 +31,7 @@ int main() {
                 ManageStaff();
                 break;
             case '4':
-                cout << "Managing runways..." << endl;
+                ManageRunways();
                 break;
             case '5':
                 cout << "Exiting..." << endl;

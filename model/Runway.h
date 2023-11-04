@@ -15,6 +15,8 @@ private:
 public:
     Runway(const string &id, int length);
 
+    Runway();
+
     virtual ~Runway();
 
     const string &getId() const;
