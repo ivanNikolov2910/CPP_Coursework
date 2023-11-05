@@ -1,15 +1,7 @@
 #ifndef COURSEWORK_FLIGHT_H
 #define COURSEWORK_FLIGHT_H
 
-#include <string>
-#include <regex>
-#include <iostream>
-#include "../constants/constants.h"
-#include "./utils/Validation.cpp"
-
-using std::string, std::regex;
-
-ResultCode validateDestination(string);
+ResultCode validateDestination(const std::string&);
 
 enum Type {
     cargo = 0,
@@ -18,25 +10,25 @@ enum Type {
 
 class Flight {
 private:
-    string id, destination;
+    std::string id, destination;
     unsigned time, distance;
     Type type;
 
 
 public:
-    Flight(Type type, string id, string destination, unsigned time, unsigned distance);
+    Flight(Type type, std::string id, std::string destination, unsigned time, unsigned distance);
 
     Flight();
 
     virtual ~Flight();
 
-    friend ResultCode validateDestination(string);
+    friend ResultCode validateDestination(const std::string&);
 
-    const string &getId() const;
+    const std::string &getId() const;
 
-    const string &getDestination() const;
+    const std::string &getDestination() const;
 
-    void setDestination(const string &destination);
+    void setDestination(const std::string &destination);
 
     unsigned int getTime() const;
 

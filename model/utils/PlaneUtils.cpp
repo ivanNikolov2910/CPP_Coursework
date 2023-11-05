@@ -1,5 +1,3 @@
-#include <iostream>
-#include "../Plane.h"
 #include "../CargoPlane.h"
 #include "../PassengerPlane.h"
 
@@ -24,7 +22,7 @@ ResultCode ListPlanes(std::vector<Plane> *planes) {
     return success;
 }
 
-ResultCode CreatePlanes(unsigned count) {
+ResultCode CreatePlanes(int count) {
     std::vector<Plane> planes;
     ResultCode res = ListPlanes(&planes);
     if (res != success) {
@@ -45,7 +43,7 @@ ResultCode CreatePlanes(unsigned count) {
     return success;
 }
 
-ResultCode DeletePlane(const string &id) {
+ResultCode DeletePlane(const std::string &id) {
     std::vector<Plane> planes;
     ResultCode res = ListPlanes(&planes);
     if (res != success) {
@@ -75,14 +73,14 @@ Plane readPlaneData(const std::vector<Plane> &planes) {
     int runwayLength;
     double fuelPerKilometer;
 
-    int businessSeats = 0, passengerSeats = 0;
+    int businessSeat = 0, passengerSeat = 0;
     int cargoWeight = 0;
 
     while (true) {
         std::cout << "Enter flight id: ";
         std::cin >> id;
 
-        if (validateId(id, PLANE_ID_PATTER) != success) {
+        if (!std::regex_match(id, PLANE_ID_PATTER)) {
             std::cout << "Flight id is not valid, try again" << std::endl;
             continue;
         }
@@ -105,10 +103,10 @@ Plane readPlaneData(const std::vector<Plane> &planes) {
     Type type;
     while (true) {
         int userInput;
-        std::cout << "Enter a type (1 - cargo, 2 - passenger): ";
+        std::cout << "Enter a type (0 - cargo, 1 - passenger): ";
         std::cin >> userInput;
 
-        if (userInput == 1 || userInput == 2) {
+        if (userInput == 0 || userInput == 1) {
             type = static_cast<Type>(userInput);
             break;
         }
@@ -128,24 +126,25 @@ Plane readPlaneData(const std::vector<Plane> &planes) {
     std::cin >> fuelPerKilometer;
 
     if (type == cargo) {
-        std::cout << "Enter max cargo weight [kg]: " << endl;
-        cin >> cargoWeight;
+        std::cout << "Enter max cargo weight [kg]: " << std::endl;
+        std::cin >> cargoWeight;
     }
     if (type == passenger) {
-        std::cout << "Enter count of seats for business class: " << endl;
-        cin >> businessSeats;
+        std::cout << "Enter count of seats for business class: " << std::endl;
+        std::cin >> businessSeat;
 
-        std::cout << "Enter count of seats for passenger class: " << endl;
-        cin >> passengerSeats;
+        std::cout << "Enter count of seats for passenger class: " << std::endl;
+        std::cin >> passengerSeat;
     }
 
     Plane *newPlane;
     if (cargoWeight > 0) {
         newPlane = new CargoPlane(id, manufacturer, brand, runwayLength, fuelPerKilometer, cargoWeight);
     } else {
-        newPlane = new PassengerPlane(id, manufacturer, brand, runwayLength, fuelPerKilometer, businessSeats,
-                                      passengerSeats);
+        newPlane = new PassengerPlane(id, manufacturer, brand, runwayLength, fuelPerKilometer, businessSeat,
+                                      passengerSeat);
     }
+    std::cout << *newPlane << std::endl;
     return *newPlane;
 }
 

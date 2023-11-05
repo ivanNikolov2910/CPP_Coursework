@@ -2,26 +2,23 @@
 #ifndef COURSEWORK_RUNWAY_H
 #define COURSEWORK_RUNWAY_H
 
-#include <string>
 #include <iostream>
-
-using std::string;
 
 class Runway {
 private:
-    string id;
+    std::string id;
     int length;
 
 public:
-    Runway(const string &id, int length);
+    Runway(const std::string &id, int length);
 
     Runway();
 
     virtual ~Runway();
 
-    const string &getId() const;
+    const std::string &getId() const;
 
-    void setId(const string &id);
+    void setId(const std::string &id);
 
     int getLength() const;
 
@@ -29,6 +26,10 @@ public:
 
     bool operator==(const Runway &other) const {
         return id == other.id;
+    }
+
+    bool operator<(const Runway &other) const {
+        return length < other.length;
     }
 
     friend std::ostream &operator<<(std::ostream &out, const Runway &obj) {

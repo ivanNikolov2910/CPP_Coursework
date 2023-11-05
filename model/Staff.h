@@ -2,10 +2,7 @@
 #ifndef COURSEWORK_STAFF_H
 #define COURSEWORK_STAFF_H
 
-#include <string>
-#include <ostream>
-
-using std::string;
+#include <iostream>
 
 enum StaffPosition {
     pilot = 0, steward = 1
@@ -13,28 +10,28 @@ enum StaffPosition {
 
 class Staff {
 private:
-    string id, name, family;
+    std::string id, name, family;
     StaffPosition position;
     double salary;
 
 public:
-    Staff(const string &id, const string &name, const string &family, StaffPosition position, double salary);
+    Staff(const std::string &id, const std::string &name, const std::string &family, StaffPosition position, double salary);
 
     Staff();
 
     virtual ~Staff();
 
-    const string &getId() const;
+    const std::string &getId() const;
 
-    void setId(const string &id);
+    void setId(const std::string &id);
 
-    const string &getName() const;
+    const std::string &getName() const;
 
-    void setName(const string &name);
+    void setName(const std::string &name);
 
-    const string &getFamily() const;
+    const std::string &getFamily() const;
 
-    void setFamily(const string &family);
+    void setFamily(const std::string &family);
 
     StaffPosition getPosition() const;
 

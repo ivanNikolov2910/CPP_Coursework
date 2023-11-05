@@ -1,8 +1,4 @@
-#include <fstream>
-#include <vector>
-#include <iostream>
 #include "../Staff.h"
-#include "../../constants/constants.h"
 
 Staff readStaffData(const std::vector<Staff> &);
 
@@ -65,7 +61,7 @@ ResultCode CreateStaff(unsigned count) {
     return success;
 }
 
-ResultCode UpdateStaff(const string &id) {
+ResultCode UpdateStaff(const std::string &id) {
     std::vector<Staff> staff;
     ResultCode res = ListStaff(&staff);
     if (res != success) {
@@ -93,7 +89,7 @@ ResultCode UpdateStaff(const string &id) {
     return rewriteStaff(staff);
 }
 
-ResultCode DeleteStaff(const string &id) {
+ResultCode DeleteStaff(const std::string &id) {
     std::vector<Staff> staff;
     ResultCode res = ListStaff(&staff);
     if (res != success) {

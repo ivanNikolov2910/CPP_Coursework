@@ -1,23 +1,21 @@
-#include <iostream>
+#include "../constants/constants.h"
 #include "../model/Flight.h"
 #include "../model/utils/FlightUtils.cpp"
 #include "./flights-options/FlightsOptions.cpp"
-
-using std::cout, std::endl, std::cin;
 
 void ManageFlights() {
     char cmd;
     std::cout << "Managing flights..." << std::endl;
     while (true) {
-        cout << "1. Create flights [-count]" << endl
-             << "2. Update flights by id" << endl
-             << "3. Delete flights by id" << endl
-             << "4. List flights" << endl
-             << "5. Detailed flights menu" << endl
-             << "6. Return to main menu" << endl
-             << endl
-             << "Enter option: ";
-        cin >> cmd;
+        std::cout << "1. Create flights [-count]" << std::endl
+                  << "2. Update flights by id" << std::endl
+                  << "3. Delete flights by id" << std::endl
+                  << "4. List flights" << std::endl
+                  << "5. Detailed flights menu" << std::endl
+                  << "6. Return to main menu" << std::endl
+                  << std::endl
+                  << "Enter option: ";
+        std::cin >> cmd;
 
         unsigned count;
         ResultCode res;
@@ -27,35 +25,35 @@ void ManageFlights() {
         switch (cmd) {
             case '1':
                 count = 1;
-                cout << "Enter count of flight to create" << endl;
-                cin >> count;
+                std::cout << "Enter count of flight to create" << std::endl;
+                std::cin >> count;
                 res = CreateFlights(count);
                 if (res != success) {
-                    cout << "Changes are not saved" << endl;
+                    std::cout << "Changes are not saved" << std::endl;
                 }
                 break;
             case '2':
-                cout << "Enter ID of flight to update" << endl;
-                cin >> id;
+                std::cout << "Enter ID of flight to update" << std::endl;
+                std::cin >> id;
                 res = UpdateFlights(id);
                 if (res != success) {
-                    cout << "Changes are not saved" << endl;
+                    std::cout << "Changes are not saved" << std::endl;
                 }
                 break;
             case '3':
-                cout << "Enter ID of flight to delete" << endl;
-                cin >> id;
+                std::cout << "Enter ID of flight to delete" << std::endl;
+                std::cin >> id;
                 res = DeleteFlights(id);
                 if (res != success) {
-                    cout << "Changes are not saved" << endl;
+                    std::cout << "Changes are not saved" << std::endl;
                 }
                 break;
             case '4':
-                cout << "List of flights" << endl;
+                std::cout << "List of flights" << std::endl;
 
                 res = ListFlights(&flights);
                 if (res != success) {
-                    cout << "Could not list flights" << endl;
+                    std::cout << "Could not list flights" << std::endl;
                 }
                 for (Flight &f: flights) {
                     std::cout << "Flight: " << std::endl;
@@ -64,24 +62,24 @@ void ManageFlights() {
                 }
                 break;
             case '5':
-                cout << "Detailed Flights Menu" << endl;
+                std::cout << "Detailed Flights Menu" << std::endl;
                 res = ListFlights(&flights);
                 if (res != success) {
-                    cout << "Could not list flights" << endl;
+                    std::cout << "Could not list flights" << std::endl;
                 }
                 if (!flights.empty()) {
-                    res = FlightsManagingOptions(&flights);
+                    res = FlightsManagingOptions(flights);
                     if (res != success) {
-                        cout << "Changes are not saved" << endl;
+                        std::cout << "Changes are not saved" << std::endl;
                     }
                 } else {
-                    cout << "No flights for detailed options" << endl;
+                    std::cout << "No flights for detailed options" << std::endl;
                 }
                 break;
             case '6':
                 return;
             default:
-                cout << "Invalid option!" << endl;
+                std::cout << "Invalid option!" << std::endl;
         }
 
     }

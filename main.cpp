@@ -4,21 +4,19 @@
 #include "engine/StaffEngine.cpp"
 #include "engine/RunwayEngine.cpp"
 
-using namespace std;
-
 int main() {
     char cmd;
 
     while (true) {
-        cout << "Menu:" << endl
-             << "1. Manage flights" << endl
-             << "2. Manage planes" << endl
-             << "3. Manage staff" << endl
-             << "4. Manage runways" << endl
-             << "5. Exit" << endl
-             << endl
-             << "Enter option: ";
-        cin >> cmd;
+        std::cout << "Menu:" << std::endl
+                  << "1. Manage flights" << std::endl
+                  << "2. Manage planes" << std::endl
+                  << "3. Manage staff" << std::endl
+                  << "4. Manage runways" << std::endl
+                  << "5. Exit" << std::endl
+                  << std::endl
+                  << "Enter option: ";
+        std::cin >> cmd;
 
         switch (cmd) {
             case '1':
@@ -34,10 +32,10 @@ int main() {
                 ManageRunways();
                 break;
             case '5':
-                cout << "Exiting..." << endl;
+                std::cout << "Exiting..." << std::endl;
                 return 0;
             default:
-                cout << "Invalid option!" << endl;
+                std::cout << "Invalid option!" << std::endl;
         }
 
     }

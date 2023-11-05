@@ -1,6 +1,3 @@
-#include <iostream>
-#include "../constants/constants.h"
-#include "../model/Runway.h"
 #include "../model/utils/RunwayUtils.cpp"
 
 void ManageRunways() {

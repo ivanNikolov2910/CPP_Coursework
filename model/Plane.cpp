@@ -1,14 +1,15 @@
+#include <string>
 #include "Plane.h"
 
 Plane::Plane() {}
 
 Plane::~Plane() {}
 
-const string &Plane::getManufacturer() const {
+const std::string &Plane::getManufacturer() const {
     return manufacturer;
 }
 
-const string &Plane::getBrand() const {
+const std::string &Plane::getBrand() const {
     return brand;
 }
 
@@ -28,6 +29,29 @@ void Plane::setFuelPerKilometer(double fuelPerKilometer) {
     Plane::fuelPerKilometer = fuelPerKilometer;
 }
 
-const string &Plane::getId() const {
+const std::string &Plane::getId() const {
     return Plane::id;
+}
+
+Plane::Plane(const std::string &id, const std::string &manufacturer, const std::string &brand, int runwayLength,
+             double fuelPerKilometer, int pilotCount, int stewardCount) : id(id), manufacturer(manufacturer),
+                                                                          brand(brand), runwayLength(runwayLength),
+                                                                          fuelPerKilometer(fuelPerKilometer),
+                                                                          pilotCount(pilotCount),
+                                                                          stewardCount(stewardCount) {}
+
+int Plane::getPilotCount() const {
+    return pilotCount;
+}
+
+void Plane::setPilotCount(int pilotCount) {
+    Plane::pilotCount = pilotCount;
+}
+
+int Plane::getStewardCount() const {
+    return stewardCount;
+}
+
+void Plane::setStewardCount(int stewardCount) {
+    Plane::stewardCount = stewardCount;
 }

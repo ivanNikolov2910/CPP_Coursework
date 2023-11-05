@@ -1,7 +1,3 @@
-#include <fstream>
-#include <vector>
-#include <iostream>
-#include "../../constants/constants.h"
 #include "../Runway.h"
 
 Runway readRunwayData(const std::vector<Runway> &);
@@ -63,7 +59,7 @@ ResultCode CreateRunway() {
     return success;
 }
 
-ResultCode UpdateRunway(const string &id) {
+ResultCode UpdateRunway(const std::string &id) {
     std::vector<Runway> runway;
     ResultCode res = ListRunway(&runway);
     if (res != success) {
@@ -91,7 +87,7 @@ ResultCode UpdateRunway(const string &id) {
     return rewriteRunway(runway);
 }
 
-ResultCode DeleteRunway(const string &id) {
+ResultCode DeleteRunway(const std::string &id) {
     std::vector<Runway> runway;
     ResultCode res = ListRunway(&runway);
     if (res != success) {
@@ -167,7 +163,7 @@ ResultCode appendRunwayToFile(const std::vector<Runway> &runway) {
 
 ResultCode updateRunwayData(Runway &runway) {
     char cmd;
-    string id;
+    std::string id;
     int length;
 
     std::cout << "Enter field index to update: " << "\n"

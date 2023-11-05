@@ -1,18 +1,14 @@
-//
-// Created by ivann on 11/2/2023.
-//
-
 #ifndef COURSEWORK_CARGOPLANE_H
 #define COURSEWORK_CARGOPLANE_H
 
-#include <ostream>
+#include <iostream>
 #include "Plane.h"
 
 class CargoPlane : public Plane {
 private:
     int cargoWeight;
 public:
-    CargoPlane(const string &id, const string &manufacturer, const string &brand, int runwayLength,
+    CargoPlane(const std::string &id, const std::string &manufacturer, const std::string &brand, int runwayLength,
                double fuelPerKilometer, int cargoWeight);
 
     int getCargoWeight() const;
@@ -26,7 +22,7 @@ public:
     }
 
     friend std::istream &operator>>(std::istream &in, CargoPlane &obj) {
-        string cw;
+        std::string cw;
         in >> static_cast<Plane &>(obj);
         in >> cw;
         obj.setCargoWeight(std::stoi(cw));

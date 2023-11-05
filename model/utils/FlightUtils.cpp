@@ -1,3 +1,4 @@
+
 #include <fstream>
 
 Flight readFlightData(const std::vector<Flight> &flights);
@@ -61,7 +62,7 @@ ResultCode CreateFlights(unsigned count) {
     return success;
 }
 
-ResultCode UpdateFlights(const string &id) {
+ResultCode UpdateFlights(const std::string &id) {
     std::vector<Flight> flights;
     ResultCode res = ListFlights(&flights);
     if (res != success) {
@@ -89,7 +90,7 @@ ResultCode UpdateFlights(const string &id) {
     return rewriteFlights(flights);
 }
 
-ResultCode DeleteFlights(const string &id) {
+ResultCode DeleteFlights(const std::string &id) {
     std::vector<Flight> flights;
     ResultCode res = ListFlights(&flights);
     if (res != success) {
@@ -125,7 +126,7 @@ Flight readFlightData(const std::vector<Flight> &flights) {
         std::cout << "Enter flight id: ";
         std::cin >> id;
 
-        if (validateId(id, FLIGHT_ID_PATTER) != success) {
+        if (!std::regex_match(id, FLIGHT_ID_PATTER)) {
             std::cout << "Flight id is not valid, try again" << std::endl;
             continue;
         }

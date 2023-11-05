@@ -1,59 +1,64 @@
-#include <iostream>
 #include "../model/utils/PlaneUtils.cpp"
-#include "../model/Plane.h"
 
 void ManagePlanes() {
-    char cmd;
-    std::cout << "Managing flights..." << std::endl;
     while (true) {
+        std::cout << "Managing planes..." << std::endl;
         std::cout << "1. Create planes [-count]" << std::endl
-                  << "2. Delete plane by id" << std::endl
+                  << "2. Delete plane by ID" << std::endl
                   << "3. List planes" << std::endl
-                  << "4. Return to main menu" << std::endl
+                  << "4. Return to the main menu" << std::endl
                   << std::endl
-                  << "Enter option: ";
+                  << "Enter an option: ";
+
+        char cmd;
         std::cin >> cmd;
 
-        int count;
+        int count = 0;
         ResultCode res;
         std::vector<Plane> planes;
-        string id;
+        std::string id;
 
         switch (cmd) {
             case '1':
-                count = 1;
-                std::cout << "Enter count of planes to create" << std::endl;
+                std::cout << "Enter the count of planes to create: ";
                 std::cin >> count;
                 res = CreatePlanes(count);
+
                 if (res != success) {
-                    std::cout << "Changes are not saved" << std::endl;
+                    std::cout << "Failed to create planes." << std::endl;
+                } else {
+                    std::cout << "Planes created successfully." << std::endl;
                 }
                 break;
             case '2':
-                std::cout << "Enter ID of plane to delete" << std::endl;
+                std::cout << "Enter the ID of the plane to delete: ";
                 std::cin >> id;
                 res = DeletePlane(id);
+
                 if (res != success) {
-                    std::cout << "Changes are not saved" << std::endl;
+                    std::cout << "Failed to delete the plane." << std::endl;
+                } else {
+                    std::cout << "Plane deleted successfully." << std::endl;
                 }
                 break;
             case '3':
-                std::cout << "List of flights" << std::endl;
+                std::cout << "List of planes:" << std::endl;
                 res = ListPlanes(&planes);
+
                 if (res != success) {
-                    std::cout << "Changes are not saved" << std::endl;
-                }
-                for (Plane &p: planes) {
-                    std::cout << "Flight: " << std::endl;
-                    std::cout << p;
-                    std::cout << "-----------------------\n";
+                    std::cout << "Failed to list planes." << std::endl;
+                } else {
+                    for (const Plane &p: planes) {
+                        std::cout << "Plane:" << std::endl;
+                        std::cout << p;
+                        std::cout << "-----------------------\n";
+                    }
                 }
                 break;
             case '4':
                 return;
             default:
-                std::cout << "Invalid option!" << std::endl;
+                std::cout << "Invalid option! Please choose a valid option." << std::endl;
         }
-
     }
 }

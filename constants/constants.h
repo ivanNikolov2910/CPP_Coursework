@@ -2,18 +2,16 @@
 #define COURSEWORK_CONSTANTS_H
 
 #include <regex>
-#include <string>
 
-using std::regex, std::string;
+const std::regex FLIGHT_ID_PATTER("[A-Z]{3}[0-9]{4,6}[A-Z]{3}");
+const std::regex PLANE_ID_PATTER("[A-Z]{2}[0-9]{4,6}");
+const std::regex BASE_CITY_NAME("^(?:[A-Z][a-z]*[\\s-]?){1,3}(?:[A-Z][a-z]*)?$");
 
-const regex FLIGHT_ID_PATTER("[A-Z]{3}[0-9]{4,6}[A-Z]{3}");
-const regex PLANE_ID_PATTER("[A-Z]{2}[0-9]{4,6}");
-const regex BASE_CITY_NAME("^(?:[A-Z][a-z]*[\\s-]?){1,3}(?:[A-Z][a-z]*)?$");
-
-const string FLIGHT_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\flights)";
-const string PLANE_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\planes)";
-const string RUNWAY_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\runways)";
-const string STAFF_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\staff)";
+const std::string FLIGHT_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\flights)";
+const std::string PLANE_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\planes)";
+const std::string RUNWAY_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\runways)";
+const std::string STAFF_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\staff)";
+const std::string ASSIGN_FLIGHTS_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\assign-flights)";
 
 
 enum ResultCode {

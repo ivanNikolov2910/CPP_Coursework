@@ -1,12 +1,6 @@
-//
-// Created by ivann on 11/2/2023.
-//
-
 #ifndef COURSEWORK_PASSENGERPLANE_H
 #define COURSEWORK_PASSENGERPLANE_H
 
-
-#include <ostream>
 #include "Plane.h"
 
 class PassengerPlane : public Plane {
@@ -14,7 +8,7 @@ private:
     int businessSeat, passengerSeat;
 
 public:
-    PassengerPlane(const string &id, const string &manufacturer, const string &brand, int runwayLength,
+    PassengerPlane(const std::string &id, const std::string &manufacturer, const std::string &brand, int runwayLength,
                    double fuelPerKilometer, int businessSeat, int passengerSeat);
 
     int getBusinessSeat() const;
@@ -33,7 +27,7 @@ public:
     }
 
     friend std::istream &operator>>(std::istream &in, PassengerPlane &obj) {
-        string bs, ps;
+        std::string bs, ps;
         in >> static_cast<Plane &>(obj);
         in >> bs;
         in >> ps;

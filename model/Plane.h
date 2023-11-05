@@ -1,30 +1,28 @@
 #ifndef COURSEWORK_PLANE_H
 #define COURSEWORK_PLANE_H
 
-#include <string>
-
-using std::string;
+#include <iostream>
 
 class Plane {
 private:
-    string id, manufacturer, brand;
+    std::string id, manufacturer, brand;
     int runwayLength;
     double fuelPerKilometer;
+    int pilotCount, stewardCount;
 
 public:
-    Plane(const string &id, const string &manufacturer, const string &brand, int runwayLength, double fuelPerKilometer)
-            : id(id), manufacturer(manufacturer), brand(brand), runwayLength(runwayLength),
-              fuelPerKilometer(fuelPerKilometer) {}
+    Plane(const std::string &id, const std::string &manufacturer, const std::string &brand, int runwayLength,
+          double fuelPerKilometer, int pilotCount, int stewardCount);
 
     Plane();
 
     virtual ~Plane();
 
-    const string &getId() const;
+    const std::string &getId() const;
 
-    const string &getManufacturer() const;
+    const std::string &getManufacturer() const;
 
-    const string &getBrand() const;
+    const std::string &getBrand() const;
 
     int getRunwayLength() const;
 
@@ -33,6 +31,14 @@ public:
     double getFuelPerKilometer() const;
 
     void setFuelPerKilometer(double fuelPerKilometer);
+
+    int getPilotCount() const;
+
+    void setPilotCount(int pilotCount);
+
+    int getStewardCount() const;
+
+    void setStewardCount(int stewardCount);
 
     bool operator==(const Plane &other) const {
         return id == other.id;
@@ -43,20 +49,26 @@ public:
             << obj.manufacturer << "\n"
             << obj.brand << "\n"
             << obj.runwayLength << "\n"
-            << obj.fuelPerKilometer << "\n";
+            << obj.fuelPerKilometer << "\n"
+            << obj.pilotCount << "\n"
+            << obj.stewardCount << "\n";
         return out;
     }
 
     friend std::istream &operator>>(std::istream &in, Plane &obj) {
-        string rl, fpk;
+        std::string rl, fpk, pc, sc;
         in >> obj.id;
         in >> obj.manufacturer;
         in >> obj.brand;
         in >> rl;
         in >> fpk;
+        in >> pc;
+        in >> sc;
 
         obj.setRunwayLength(std::stoi(rl));
         obj.setFuelPerKilometer(std::stoi(fpk));
+        obj.setStewardCount(std::stoi(sc));
+        obj.setPilotCount(std::stoi(pc));
         return in;
     }
 };

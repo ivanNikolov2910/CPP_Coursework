@@ -1,10 +1,7 @@
-//
-// Created by ivann on 11/2/2023.
-//
-
+#include <string>
 #include "PassengerPlane.h"
 
-PassengerPlane::PassengerPlane(const string &id, const string &manufacturer, const string &brand, int runwayLength,
+PassengerPlane::PassengerPlane(const std::string &id, const std::string &manufacturer, const std::string &brand, int runwayLength,
                                double fuelPerKilometer, int businessSeat, int passengerSeat) {
     Plane(id, manufacturer, brand, runwayLength, fuelPerKilometer);
     this->businessSeat = businessSeat;

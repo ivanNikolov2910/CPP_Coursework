@@ -1,7 +1,8 @@
-#include "Flight.h"
+#include <string>
 #include "../constants/constants.h"
+#include "Flight.h"
 
-Flight::Flight(Type type, string id, string destination, unsigned time, unsigned distance) {
+Flight::Flight(Type type, std::string id, std::string destination, unsigned time, unsigned distance) {
     this->type = type;
     this->id = id;
     this->time = time;
@@ -9,23 +10,19 @@ Flight::Flight(Type type, string id, string destination, unsigned time, unsigned
     this->destination = destination;
 }
 
-Flight::Flight() {
+Flight::Flight() {}
 
-}
+Flight::~Flight() {}
 
-Flight::~Flight() {
-
-}
-
-const string &Flight::getId() const {
+const std::string &Flight::getId() const {
     return id;
 }
 
-const string &Flight::getDestination() const {
+const std::string &Flight::getDestination() const {
     return destination;
 }
 
-void Flight::setDestination(const string &destination) {
+void Flight::setDestination(const std::string &destination) {
     Flight::destination = destination;
 }
 
@@ -49,7 +46,7 @@ void Flight::setDistance(unsigned int distance) {
     Flight::distance = distance;
 }
 
-ResultCode validateDestination(string validateDestination) {
+ResultCode validateDestination(const std::string& validateDestination) {
     if (std::regex_match(validateDestination, BASE_CITY_NAME)) {
         return success;
     }
