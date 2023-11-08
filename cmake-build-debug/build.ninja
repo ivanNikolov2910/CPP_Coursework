@@ -55,41 +55,41 @@ build CMakeFiles/Coursework.dir/main.cpp.obj: CXX_COMPILER__Coursework_unscanned
   OBJECT_DIR = CMakeFiles\Coursework.dir
   OBJECT_FILE_DIR = CMakeFiles\Coursework.dir
 
-build CMakeFiles/Coursework.dir/model/Staff.cpp.obj: CXX_COMPILER__Coursework_unscanned_Debug D$:/Workplace/CppTU/Coursework/model/Staff.cpp || cmake_object_order_depends_target_Coursework
-  DEP_FILE = CMakeFiles\Coursework.dir\model\Staff.cpp.obj.d
+build CMakeFiles/Coursework.dir/model/corp-data/Staff.cpp.obj: CXX_COMPILER__Coursework_unscanned_Debug D$:/Workplace/CppTU/Coursework/model/corp-data/Staff.cpp || cmake_object_order_depends_target_Coursework
+  DEP_FILE = CMakeFiles\Coursework.dir\model\corp-data\Staff.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Coursework.dir
-  OBJECT_FILE_DIR = CMakeFiles\Coursework.dir\model
+  OBJECT_FILE_DIR = CMakeFiles\Coursework.dir\model\corp-data
 
-build CMakeFiles/Coursework.dir/model/Runway.cpp.obj: CXX_COMPILER__Coursework_unscanned_Debug D$:/Workplace/CppTU/Coursework/model/Runway.cpp || cmake_object_order_depends_target_Coursework
-  DEP_FILE = CMakeFiles\Coursework.dir\model\Runway.cpp.obj.d
+build CMakeFiles/Coursework.dir/model/corp-data/Runway.cpp.obj: CXX_COMPILER__Coursework_unscanned_Debug D$:/Workplace/CppTU/Coursework/model/corp-data/Runway.cpp || cmake_object_order_depends_target_Coursework
+  DEP_FILE = CMakeFiles\Coursework.dir\model\corp-data\Runway.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Coursework.dir
-  OBJECT_FILE_DIR = CMakeFiles\Coursework.dir\model
+  OBJECT_FILE_DIR = CMakeFiles\Coursework.dir\model\corp-data
 
-build CMakeFiles/Coursework.dir/model/Plane.cpp.obj: CXX_COMPILER__Coursework_unscanned_Debug D$:/Workplace/CppTU/Coursework/model/Plane.cpp || cmake_object_order_depends_target_Coursework
-  DEP_FILE = CMakeFiles\Coursework.dir\model\Plane.cpp.obj.d
+build CMakeFiles/Coursework.dir/model/plane/Plane.cpp.obj: CXX_COMPILER__Coursework_unscanned_Debug D$:/Workplace/CppTU/Coursework/model/plane/Plane.cpp || cmake_object_order_depends_target_Coursework
+  DEP_FILE = CMakeFiles\Coursework.dir\model\plane\Plane.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Coursework.dir
-  OBJECT_FILE_DIR = CMakeFiles\Coursework.dir\model
+  OBJECT_FILE_DIR = CMakeFiles\Coursework.dir\model\plane
 
-build CMakeFiles/Coursework.dir/model/PassengerPlane.cpp.obj: CXX_COMPILER__Coursework_unscanned_Debug D$:/Workplace/CppTU/Coursework/model/PassengerPlane.cpp || cmake_object_order_depends_target_Coursework
-  DEP_FILE = CMakeFiles\Coursework.dir\model\PassengerPlane.cpp.obj.d
+build CMakeFiles/Coursework.dir/model/plane/PassengerPlane.cpp.obj: CXX_COMPILER__Coursework_unscanned_Debug D$:/Workplace/CppTU/Coursework/model/plane/PassengerPlane.cpp || cmake_object_order_depends_target_Coursework
+  DEP_FILE = CMakeFiles\Coursework.dir\model\plane\PassengerPlane.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Coursework.dir
-  OBJECT_FILE_DIR = CMakeFiles\Coursework.dir\model
+  OBJECT_FILE_DIR = CMakeFiles\Coursework.dir\model\plane
 
-build CMakeFiles/Coursework.dir/model/Flight.cpp.obj: CXX_COMPILER__Coursework_unscanned_Debug D$:/Workplace/CppTU/Coursework/model/Flight.cpp || cmake_object_order_depends_target_Coursework
-  DEP_FILE = CMakeFiles\Coursework.dir\model\Flight.cpp.obj.d
+build CMakeFiles/Coursework.dir/model/corp-data/Flight.cpp.obj: CXX_COMPILER__Coursework_unscanned_Debug D$:/Workplace/CppTU/Coursework/model/corp-data/Flight.cpp || cmake_object_order_depends_target_Coursework
+  DEP_FILE = CMakeFiles\Coursework.dir\model\corp-data\Flight.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Coursework.dir
-  OBJECT_FILE_DIR = CMakeFiles\Coursework.dir\model
+  OBJECT_FILE_DIR = CMakeFiles\Coursework.dir\model\corp-data
 
-build CMakeFiles/Coursework.dir/model/CargoPlane.cpp.obj: CXX_COMPILER__Coursework_unscanned_Debug D$:/Workplace/CppTU/Coursework/model/CargoPlane.cpp || cmake_object_order_depends_target_Coursework
-  DEP_FILE = CMakeFiles\Coursework.dir\model\CargoPlane.cpp.obj.d
+build CMakeFiles/Coursework.dir/model/plane/CargoPlane.cpp.obj: CXX_COMPILER__Coursework_unscanned_Debug D$:/Workplace/CppTU/Coursework/model/plane/CargoPlane.cpp || cmake_object_order_depends_target_Coursework
+  DEP_FILE = CMakeFiles\Coursework.dir\model\plane\CargoPlane.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Coursework.dir
-  OBJECT_FILE_DIR = CMakeFiles\Coursework.dir\model
+  OBJECT_FILE_DIR = CMakeFiles\Coursework.dir\model\plane
 
 
 # =============================================================================
@@ -99,7 +99,7 @@ build CMakeFiles/Coursework.dir/model/CargoPlane.cpp.obj: CXX_COMPILER__Coursewo
 #############################################
 # Link the executable Coursework.exe
 
-build Coursework.exe: CXX_EXECUTABLE_LINKER__Coursework_Debug CMakeFiles/Coursework.dir/main.cpp.obj CMakeFiles/Coursework.dir/model/Staff.cpp.obj CMakeFiles/Coursework.dir/model/Runway.cpp.obj CMakeFiles/Coursework.dir/model/Plane.cpp.obj CMakeFiles/Coursework.dir/model/PassengerPlane.cpp.obj CMakeFiles/Coursework.dir/model/Flight.cpp.obj CMakeFiles/Coursework.dir/model/CargoPlane.cpp.obj
+build Coursework.exe: CXX_EXECUTABLE_LINKER__Coursework_Debug CMakeFiles/Coursework.dir/main.cpp.obj CMakeFiles/Coursework.dir/model/corp-data/Staff.cpp.obj CMakeFiles/Coursework.dir/model/corp-data/Runway.cpp.obj CMakeFiles/Coursework.dir/model/plane/Plane.cpp.obj CMakeFiles/Coursework.dir/model/plane/PassengerPlane.cpp.obj CMakeFiles/Coursework.dir/model/corp-data/Flight.cpp.obj CMakeFiles/Coursework.dir/model/plane/CargoPlane.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Coursework.dir

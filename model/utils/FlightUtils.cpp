@@ -111,7 +111,7 @@ ResultCode DeleteFlights(const std::string &id) {
         flights.erase(flights.begin() + toDelete);
         return rewriteFlights(flights);
     }
-    std::cout << "Could not find flight with id: " << id << std::endl;
+    std::cout << "Could not find corp-data with id: " << id << std::endl;
     return internal_error;
 }
 
@@ -123,7 +123,7 @@ Flight readFlightData(const std::vector<Flight> &flights) {
     unsigned time, distance;
 
     while (true) {
-        std::cout << "Enter flight id: ";
+        std::cout << "Enter corp-data id: ";
         std::cin >> id;
 
         if (!std::regex_match(id, FLIGHT_ID_PATTER)) {
@@ -168,7 +168,7 @@ Flight readFlightData(const std::vector<Flight> &flights) {
         std::cout << "Invalid input for name of destination!" << std::endl;
     }
 
-    std::cout << "Enter flight time in minutes: ";
+    std::cout << "Enter corp-data time in minutes: ";
     std::cin >> time;
 
     std::cout << "Enter distance in km: ";
@@ -227,7 +227,7 @@ ResultCode updateFlightData(Flight &flight) {
             flight.setDistance(newDistance);
             break;
         case '4':
-            return success; // Discard changes
+            return success;
         default:
             std::cout << "Invalid operation index, update failed" << std::endl;
             return validation_error;

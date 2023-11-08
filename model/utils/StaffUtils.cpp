@@ -1,4 +1,4 @@
-#include "../Staff.h"
+#include "../corp-data/Staff.h"
 
 Staff readStaffData(const std::vector<Staff> &);
 

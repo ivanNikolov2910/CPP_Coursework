@@ -1,5 +1,5 @@
 #include "../constants/constants.h"
-#include "../model/Flight.h"
+#include "../model/corp-data/Flight.h"
 #include "../model/utils/FlightUtils.cpp"
 #include "./flights-options/FlightsOptions.cpp"
 

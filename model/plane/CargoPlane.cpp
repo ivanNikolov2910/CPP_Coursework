@@ -1,25 +1,22 @@
 #include <string>
 #include "CargoPlane.h"
 
-CargoPlane::CargoPlane(const std::string &id, const std::string &manufacturer, const std::string &brand, int runwayLength,
+CargoPlane::CargoPlane(const std::string &id, const std::string &manufacturer, const std::string &brand,
+                       int runwayLength,
                        double fuelPerKilometer, int pilotCount, int stewardCount, int cargoWeight)
-    : Plane(id, manufacturer, brand, runwayLength, fuelPerKilometer, pilotCount, stewardCount)
-{
+        : Plane(id, manufacturer, brand, runwayLength, fuelPerKilometer, pilotCount, stewardCount) {
     CargoPlane::cargoWeight = cargoWeight;
 }
 
-int CargoPlane::getCargoWeight() const
-{
+int CargoPlane::getCargoWeight() const {
     return cargoWeight;
 }
 
-void CargoPlane::setCargoWeight(int cargoWeight)
-{
+void CargoPlane::setCargoWeight(int cargoWeight) {
     CargoPlane::cargoWeight = cargoWeight;
 }
 
-std::ostream &CargoPlane::put(std::ostream &out) const
-{
+std::ostream &CargoPlane::put(std::ostream &out) const {
     out << getId() << "\n"
         << getManufacturer() << "\n"
         << getBrand() << "\n"
@@ -31,8 +28,7 @@ std::ostream &CargoPlane::put(std::ostream &out) const
     return out;
 }
 
-std::istream &CargoPlane::get(std::istream &in)
-{
+std::istream &CargoPlane::get(std::istream &in) {
     std::string id, manuf, brand, rLength, fPerKilo, pCnt, sCnt;
     std::string maxWeigth;
 

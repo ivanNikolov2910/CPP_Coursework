@@ -1,7 +1,8 @@
 #include <string>
 #include "Staff.h"
 
-Staff::Staff(const std::string &id, const std::string &name, const std::string &family, StaffPosition position, double salary) {
+Staff::Staff(const std::string &id, const std::string &name, const std::string &family, StaffPosition position,
+             double salary) {
     Staff::id = id;
     Staff::name = name;
     Staff::family = family;
@@ -9,9 +10,7 @@ Staff::Staff(const std::string &id, const std::string &name, const std::string &
     Staff::salary = salary;
 }
 
-Staff::Staff() {}
-
-Staff::~Staff() {}
+Staff::~Staff() = default;
 
 const std::string &Staff::getId() const {
     return id;

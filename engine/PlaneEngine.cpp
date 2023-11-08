@@ -15,7 +15,7 @@ void ManagePlanes() {
 
         int count = 0;
         ResultCode res;
-        std::vector<Plane> planes;
+        std::vector<Plane*> planes;
         std::string id;
 
         switch (cmd) {
@@ -48,7 +48,7 @@ void ManagePlanes() {
                 if (res != success) {
                     std::cout << "Failed to list planes." << std::endl;
                 } else {
-                    for (const Plane &p: planes) {
+                    for (const Plane *p: planes) {
                         std::cout << "Plane:" << std::endl;
                         std::cout << p;
                         std::cout << "-----------------------\n";

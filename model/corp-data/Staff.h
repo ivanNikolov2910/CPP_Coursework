@@ -15,7 +15,8 @@ private:
     double salary;
 
 public:
-    Staff(const std::string &id, const std::string &name, const std::string &family, StaffPosition position, double salary);
+    Staff(const std::string &id, const std::string &name, const std::string &family, StaffPosition position,
+          double salary);
 
     Staff();
 

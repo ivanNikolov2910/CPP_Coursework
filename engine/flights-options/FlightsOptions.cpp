@@ -4,10 +4,10 @@
 #include <vector>
 #include <algorithm>
 #include <regex>
-#include "../../model/Runway.h"
-#include "../../model/Plane.h"
-#include "../../model/CargoPlane.h"
-#include "../../model/PassengerPlane.h"
+#include "../../model/corp-data/Runway.h"
+#include "../../model/plane/Plane.h"
+#include "../../model/plane/CargoPlane.h"
+#include "../../model/plane/PassengerPlane.h"
 #include "../../model/utils/RunwayUtils.cpp"
 #include "../../model/utils/PlaneUtils.cpp"
 
@@ -16,25 +16,33 @@
 #define STEWARD_SALARY_PER_FLIGHT 550
 
 struct ResultData {
-    ResultCode res = internal_error;
-    Runway runway;
+    ResultCode res = not_found_error;
+    Runway *runway{};
     Plane *plane{};
+
+    ResultData() = default;
+
+    ResultData(ResultCode res, Runway *runway, Plane *plane) {
+        this->res = res;
+        this->runway = runway;
+        this->plane = plane;
+    }
 };
 
 double calculateExpensesForFlight(const Plane &plane, const Flight &flight);
 
-ResultCode assignPlane(const Flight &flight, const std::vector<Plane> &planes, const std::vector<Runway> &runways);
+ResultCode assignPlane(const Flight &flight, const std::vector<Plane *> &planes, const std::vector<Runway> &runways);
 
 ResultData *
-recommendedPlanesByFlight(const std::vector<Plane> &planes, const Flight &flight, const std::vector<Runway> &runways);
+recommendedPlanesByFlight(const std::vector<Plane *> &planes, const Flight &flight, const std::vector<Runway> &runways);
 
 ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
     char cmd;
     ResultData *resultData;
     ResultCode res;
 
-    std::vector<Plane> *planes = new std::vector<Plane>;
-    std::vector<Runway> *runways = new std::vector<Runway>;
+    std::vector<Plane *> planes;
+    std::vector<Runway> runways;
     Flight *flightToAssign;
     std::string flightId;
 
@@ -42,8 +50,8 @@ ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
         std::cin >> cmd;
         switch (cmd) {
             case '1':
-                std::cout << "Assign plane to flight" << std::endl;
-                res = ListPlanes(planes);
+                std::cout << "Assign plane to corp-data" << std::endl;
+                res = ListPlanes(&planes);
                 if (res != success) {
                     std::cout << "No planes found to list" << std::endl;
                     break;
@@ -53,7 +61,7 @@ ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
                     std::cout << f;
                     std::cout << "-----------------------\n";
                 }
-                std::cout << "Enter flight id: ";
+                std::cout << "Enter corp-data id: ";
                 while (true) {
                     std::cin >> flightId;
                     if (!std::regex_match(flightId, FLIGHT_ID_PATTER)) {
@@ -74,22 +82,22 @@ ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
                     break;
                 }
 
-                res = ListRunway(runways);
+                res = ListRunway(&runways);
                 if (res != success) {
                     std::cout << "No planes found to list" << std::endl;
                     break;
                 }
                 std::cout << "Flight is assign to file" << std::endl;
-                res = assignPlane(*flightToAssign, *planes, *runways);
+                res = assignPlane(*flightToAssign, planes, runways);
                 if (res == success) {
                     std::cout << "Flight is assigned to a plane" << std::endl;
                 } else {
-                    std::cout << "An error occurred, flight is not assigned" << std::endl;
+                    std::cout << "An error occurred, corp-data is not assigned" << std::endl;
                 }
                 break;
             case '2':
-                std::cout << "Search for recommended plane for flight" << std::endl;
-                std::cout << "Enter flight id: ";
+                std::cout << "Search for recommended plane for corp-data" << std::endl;
+                std::cout << "Enter corp-data id: ";
                 while (true) {
                     std::cin >> flightId;
                     if (std::regex_match(flightId, FLIGHT_ID_PATTER)) {
@@ -100,7 +108,7 @@ ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
 
                 for (const Flight &f: flights) {
                     if (f.getId() == flightId) {
-                        resultData = recommendedPlanesByFlight(*planes, f, *runways);
+                        resultData = recommendedPlanesByFlight(planes, f, runways);
 
                         if (resultData && resultData->res == success) {
                             std::cout << "Recommended Plane: " << resultData->plane << " on Runway: "
@@ -136,62 +144,29 @@ ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
     }
 }
 
-ResultCode assignPlane(Flight *flight, std::vector<Plane> *planes, std::vector<Runway> *runways) {
-    Type flightType = flight->getType();
-
-    ResultCode res = ListRunway(runways);
-    if (res != success) {
-        std::cout << "Could not list runways" << std::endl;
-        return internal_error;
-    }
-
-    std::sort(runways->begin(), runways->end());
-
-    std::fstream file(ASSIGN_FLIGHTS_FILE_PATH, std::fstream::app);
-    if (!file) {
-        std::cout << "Failed to open the file." << std::endl;
-        return internal_error;
-    }
-
-    for (const Plane &p: *planes) {
-        if ((flightType == cargo && instanceof<CargoPlane>(&p)) ||
-            (flightType == passenger && instanceof<PassengerPlane>(&p))) {
-            for (const Runway &r: *runways) {
-                if (flight->getDistance() >= r.getLength()) {
-                    if (file) {
-                        file << p << flight << r << "\n";
-                        file.close();
-                        return success;
-                    } else {
-                        std::cout << "Failed to open the file." << std::endl;
-                        return internal_error;
-                    }
-                }
-            }
-        }
-    }
-    std::cout << "No suitable planes found for the flight" << std::endl;
-    return internal_error;
-}
-
 ResultData *
 recommendedPlanesByFlight(const std::vector<Plane> &planes, const Flight &flight, const std::vector<Runway> &runways) {
     ResultData *result = new ResultData;
-    result->res = internal_error;
     double minExpense = std::numeric_limits<double>::max();
 
     for (const Plane &p: planes) {
         double totalExpense = calculateExpensesForFlight(p, flight);
 
-        for (const Runway &r: runways) {
+        for (Runway r: runways) {
             int runwayLengthDiff = p.getRunwayLength() - r.getLength();
 
             if (totalExpense < minExpense && runwayLengthDiff >= 0) {
                 minExpense = totalExpense;
+
+                if (instanceof<CargoPlane>(&p)) {
+                    result->plane = (CargoPlane *) &p;
+                } else if (instanceof<PassengerPlane>(&p)) {
+                    result->plane = (PassengerPlane *) &p;
+                } else {
+                    return new ResultData(internal_error, nullptr, nullptr);
+                }
                 result->res = success;
-                // TODO Implement instanceof
-//                result->plane = (Plane *) p;
-                result->runway = r;
+                result->runway = &r;
             }
         }
     }
@@ -206,4 +181,34 @@ double calculateExpensesForFlight(const Plane &plane, const Flight &flight) {
                           (static_cast<int>(flight.getDistance() / 1000) + 1) * PILOT_SALARY_PER_FLIGHT *
                           plane.getPilotCount());
     return fuelCost + staffSalary;
+}
+
+ResultCode assignPlane(const Flight &flight, const std::vector<Plane *> &planes, const std::vector<Runway> &runways) {
+    Type flightType = flight.getType();
+
+    std::fstream file(ASSIGN_FLIGHTS_FILE_PATH, std::fstream::app);
+    if (!file) {
+        std::cout << "Failed to open the file." << std::endl;
+        return internal_error;
+    }
+
+    for (const Plane *p: planes) {
+        if ((flightType == cargo && instanceof<CargoPlane>(p)) ||
+            (flightType == passenger && instanceof<PassengerPlane>(p))) {
+            for (const Runway &r: runways) {
+                if (flight.getDistance() >= r.getLength()) {
+                    if (file) {
+                        file << p << flight << r << "\n";
+                        file.close();
+                        return success;
+                    } else {
+                        std::cout << "Failed to open the file." << std::endl;
+                        return internal_error;
+                    }
+                }
+            }
+        }
+    }
+    std::cout << "No suitable planes found for the corp-data" << std::endl;
+    return internal_error;
 }

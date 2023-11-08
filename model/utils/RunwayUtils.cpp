@@ -1,5 +1,3 @@
-#include "../Runway.h"
-
 Runway readRunwayData(const std::vector<Runway> &);
 
 ResultCode appendRunwayToFile(const std::vector<Runway> &);
@@ -32,9 +30,9 @@ ResultCode ListRunway(std::vector<Runway> *runway) {
         return internal_error;
     }
 
-    Runway newRunway;
-    while (file >> newRunway) {
-        runway->push_back(newRunway);
+    Runway *newRunway;
+    while (file >> *newRunway) {
+        runway->push_back(*newRunway);
     }
 
     return success;

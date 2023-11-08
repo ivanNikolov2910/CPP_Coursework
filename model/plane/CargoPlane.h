@@ -4,8 +4,7 @@
 #include <iostream>
 #include "Plane.h"
 
-class CargoPlane : public Plane
-{
+class CargoPlane : public Plane {
 private:
     int cargoWeight;
 
@@ -18,6 +17,7 @@ public:
     void setCargoWeight(int cargoWeight);
 
     std::ostream &put(std::ostream &out) const override;
+
     std::istream &get(std::istream &in) override;
 };
 

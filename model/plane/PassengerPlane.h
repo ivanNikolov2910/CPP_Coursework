@@ -1,10 +1,10 @@
 #ifndef COURSEWORK_PASSENGERPLANE_H
 #define COURSEWORK_PASSENGERPLANE_H
 
+#include <iostream>
 #include "Plane.h"
 
-class PassengerPlane : public Plane
-{
+class PassengerPlane : public Plane {
 private:
     int businessSeat, passengerSeat;
 
@@ -21,6 +21,7 @@ public:
     void setPassengerSeat(int passengerSeat);
 
     std::ostream &put(std::ostream &out) const override;
+
     std::istream &get(std::istream &in) override;
 };
 

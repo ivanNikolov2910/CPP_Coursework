@@ -1,37 +1,33 @@
 #include <string>
 #include "PassengerPlane.h"
 
-PassengerPlane::PassengerPlane(const std::string &id, const std::string &manufacturer, const std::string &brand, int runwayLength,
-                               double fuelPerKilometer, int pilotCount, int stewardCount, int businessSeat, int passengerSeat) 
-                               : Plane(id, manufacturer, brand, runwayLength, fuelPerKilometer, pilotCount, stewardCount)
-{
+PassengerPlane::PassengerPlane(const std::string &id, const std::string &manufacturer, const std::string &brand,
+                               int runwayLength,
+                               double fuelPerKilometer, int pilotCount, int stewardCount, int businessSeat,
+                               int passengerSeat)
+        : Plane(id, manufacturer, brand, runwayLength, fuelPerKilometer, pilotCount, stewardCount) {
 
-    this->businessSeat = businessSeat;
-    this->passengerSeat = passengerSeat;
-}
-
-int PassengerPlane::getBusinessSeat() const
-{
-    return businessSeat;
-}
-
-void PassengerPlane::setBusinessSeat(int businessSeat)
-{
     PassengerPlane::businessSeat = businessSeat;
-}
-
-int PassengerPlane::getPassengerSeat() const
-{
-    return passengerSeat;
-}
-
-void PassengerPlane::setPassengerSeat(int passengerSeat)
-{
     PassengerPlane::passengerSeat = passengerSeat;
 }
 
-std::ostream &PassengerPlane::put(std::ostream &out) const
-{
+int PassengerPlane::getBusinessSeat() const {
+    return businessSeat;
+}
+
+void PassengerPlane::setBusinessSeat(int businessSeat) {
+    PassengerPlane::businessSeat = businessSeat;
+}
+
+int PassengerPlane::getPassengerSeat() const {
+    return passengerSeat;
+}
+
+void PassengerPlane::setPassengerSeat(int passengerSeat) {
+    PassengerPlane::passengerSeat = passengerSeat;
+}
+
+std::ostream &PassengerPlane::put(std::ostream &out) const {
     out << getId() << "\n"
         << getManufacturer() << "\n"
         << getBrand() << "\n"
@@ -44,8 +40,7 @@ std::ostream &PassengerPlane::put(std::ostream &out) const
     return out;
 }
 
-std::istream &PassengerPlane::get(std::istream &in)
-{
+std::istream &PassengerPlane::get(std::istream &in) {
     std::string id, manuf, brand, rLength, fPerKilo, pCnt, sCnt;
     std::string bs, ps;
 

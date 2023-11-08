@@ -1,7 +1,7 @@
 #ifndef COURSEWORK_FLIGHT_H
 #define COURSEWORK_FLIGHT_H
 
-ResultCode validateDestination(const std::string&);
+ResultCode validateDestination(const std::string &);
 
 enum Type {
     cargo = 0,
@@ -13,8 +13,6 @@ private:
     std::string id, destination;
     unsigned time, distance;
     Type type;
-
-
 public:
     Flight(Type type, std::string id, std::string destination, unsigned time, unsigned distance);
 
@@ -22,7 +20,7 @@ public:
 
     virtual ~Flight();
 
-    friend ResultCode validateDestination(const std::string&);
+    friend ResultCode validateDestination(const std::string &);
 
     const std::string &getId() const;
 

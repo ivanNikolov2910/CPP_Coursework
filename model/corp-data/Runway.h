@@ -12,8 +12,6 @@ private:
 public:
     Runway(const std::string &id, int length);
 
-    Runway();
-
     virtual ~Runway();
 
     const std::string &getId() const;

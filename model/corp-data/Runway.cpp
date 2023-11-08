@@ -1,9 +1,12 @@
 #include <string>
 #include "Runway.h"
 
-Runway::Runway(const std::string &id, int length) : id(id), length(length) {}
+Runway::Runway(const std::string &id, int length) {
+    Runway::id = id;
+    Runway::length = length;
+}
 
-Runway::~Runway() {}
+Runway::~Runway() = default;
 
 const std::string &Runway::getId() const {
     return id;
@@ -20,5 +23,3 @@ int Runway::getLength() const {
 void Runway::setLength(int length) {
     Runway::length = length;
 }
-
-Runway::Runway() {}

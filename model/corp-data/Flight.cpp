@@ -1,16 +1,14 @@
 #include <string>
-#include "../constants/constants.h"
+#include "../../constants/constants.h"
 #include "Flight.h"
 
 Flight::Flight(Type type, std::string id, std::string destination, unsigned time, unsigned distance) {
-    this->type = type;
-    this->id = id;
-    this->time = time;
-    this->distance = distance;
-    this->destination = destination;
+    Flight::type = type;
+    Flight::id = id;
+    Flight::time = time;
+    Flight::distance = distance;
+    Flight::destination = destination;
 }
-
-Flight::Flight() {}
 
 Flight::~Flight() {}
 
@@ -46,7 +44,7 @@ void Flight::setDistance(unsigned int distance) {
     Flight::distance = distance;
 }
 
-ResultCode validateDestination(const std::string& validateDestination) {
+ResultCode validateDestination(const std::string &validateDestination) {
     if (std::regex_match(validateDestination, BASE_CITY_NAME)) {
         return success;
     }
