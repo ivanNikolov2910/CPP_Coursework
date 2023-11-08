@@ -13,9 +13,18 @@ const std::string RUNWAY_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\
 const std::string STAFF_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\staff)";
 const std::string ASSIGN_FLIGHTS_FILE_PATH = R"(D:\Workplace\CppTU\Coursework\resources\assign-flights)";
 
+template <typename Base, typename T>
+inline bool instanceof (const T *ptr)
+{
+    return dynamic_cast<const Base *>(ptr) != nullptr;
+}
 
-enum ResultCode {
-    success, validation_error, internal_error, not_found_error
+enum ResultCode
+{
+    success,
+    validation_error,
+    internal_error,
+    not_found_error
 };
 
 #endif
