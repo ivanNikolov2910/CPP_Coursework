@@ -1,40 +1,5 @@
-#include <limits>
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <algorithm>
-#include <regex>
-#include "../../model/corp-data/Runway.h"
-#include "../../model/plane/Plane.h"
-#include "../../model/plane/CargoPlane.h"
-#include "../../model/plane/PassengerPlane.h"
-#include "../../model/utils/RunwayUtils.cpp"
-#include "../../model/utils/PlaneUtils.cpp"
 
-#define FUEL_PRICE_PER_LITER 3.59
-#define PILOT_SALARY_PER_FLIGHT 800
-#define STEWARD_SALARY_PER_FLIGHT 550
-
-struct ResultData {
-    ResultCode res = not_found_error;
-    Runway *runway{};
-    Plane *plane{};
-
-    ResultData() = default;
-
-    ResultData(ResultCode res, Runway *runway, Plane *plane) {
-        this->res = res;
-        this->runway = runway;
-        this->plane = plane;
-    }
-};
-
-double calculateExpensesForFlight(const Plane &plane, const Flight &flight);
-
-ResultCode assignPlane(const Flight &flight, const std::vector<Plane *> &planes, const std::vector<Runway> &runways);
-
-ResultData *
-recommendedPlanesByFlight(const std::vector<Plane *> &planes, const Flight &flight, const std::vector<Runway> &runways);
+#include "FlightsOptions.h"
 
 ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
     char cmd;
@@ -47,10 +12,15 @@ ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
     std::string flightId;
 
     while (true) {
+        std::cout << "1. Assign plane to flight" << std::endl
+                  << "2. Search for recommended plane" << std::endl
+                  << "3. Return to main menu" << std::endl
+                  << std::endl
+                  << "Enter option: ";
         std::cin >> cmd;
         switch (cmd) {
             case '1':
-                std::cout << "Assign plane to corp-data" << std::endl;
+                std::cout << "Assigning plane" << std::endl;
                 res = ListPlanes(&planes);
                 if (res != success) {
                     std::cout << "No planes found to list" << std::endl;
@@ -61,7 +31,7 @@ ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
                     std::cout << f;
                     std::cout << "-----------------------\n";
                 }
-                std::cout << "Enter corp-data id: ";
+                std::cout << "Enter plane id: ";
                 while (true) {
                     std::cin >> flightId;
                     if (!std::regex_match(flightId, FLIGHT_ID_PATTER)) {
@@ -82,7 +52,7 @@ ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
                     break;
                 }
 
-                res = ListRunway(&runways);
+                res = ListRunway(runways);
                 if (res != success) {
                     std::cout << "No planes found to list" << std::endl;
                     break;
@@ -96,7 +66,7 @@ ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
                 }
                 break;
             case '2':
-                std::cout << "Search for recommended plane for corp-data" << std::endl;
+                std::cout << "Searching for recommended plane" << std::endl;
                 std::cout << "Enter corp-data id: ";
                 while (true) {
                     std::cin >> flightId;
@@ -145,23 +115,24 @@ ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
 }
 
 ResultData *
-recommendedPlanesByFlight(const std::vector<Plane> &planes, const Flight &flight, const std::vector<Runway> &runways) {
-    ResultData *result = new ResultData;
+recommendedPlanesByFlight(const std::vector<Plane *> &planes, const Flight &flight,
+                          const std::vector<Runway> &runways) {
+    auto *result = new ResultData;
     double minExpense = std::numeric_limits<double>::max();
 
-    for (const Plane &p: planes) {
-        double totalExpense = calculateExpensesForFlight(p, flight);
+    for (Plane *p: planes) {
+        double totalExpense = calculateExpensesForFlight(*p, flight);
 
         for (Runway r: runways) {
-            int runwayLengthDiff = p.getRunwayLength() - r.getLength();
+            int runwayLengthDiff = p->getRunwayLength() - r.getLength();
 
             if (totalExpense < minExpense && runwayLengthDiff >= 0) {
                 minExpense = totalExpense;
 
-                if (instanceof<CargoPlane>(&p)) {
-                    result->plane = (CargoPlane *) &p;
-                } else if (instanceof<PassengerPlane>(&p)) {
-                    result->plane = (PassengerPlane *) &p;
+                if (instanceof<CargoPlane>(p)) {
+                    result->plane = (CargoPlane *) p;
+                } else if (instanceof<PassengerPlane>(p)) {
+                    result->plane = (PassengerPlane *) p;
                 } else {
                     return new ResultData(internal_error, nullptr, nullptr);
                 }

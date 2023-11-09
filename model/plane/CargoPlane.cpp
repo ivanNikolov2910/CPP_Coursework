@@ -1,4 +1,3 @@
-#include <string>
 #include "CargoPlane.h"
 
 CargoPlane::CargoPlane(const std::string &id, const std::string &manufacturer, const std::string &brand,
@@ -7,6 +6,8 @@ CargoPlane::CargoPlane(const std::string &id, const std::string &manufacturer, c
         : Plane(id, manufacturer, brand, runwayLength, fuelPerKilometer, pilotCount, stewardCount) {
     CargoPlane::cargoWeight = cargoWeight;
 }
+
+CargoPlane::~CargoPlane() {}
 
 int CargoPlane::getCargoWeight() const {
     return cargoWeight;
@@ -17,14 +18,15 @@ void CargoPlane::setCargoWeight(int cargoWeight) {
 }
 
 std::ostream &CargoPlane::put(std::ostream &out) const {
-    out << getId() << "\n"
+    out << cargo << "\n"
+        << getId() << "\n"
         << getManufacturer() << "\n"
         << getBrand() << "\n"
         << getRunwayLength() << "\n"
         << getFuelPerKilometer() << "\n"
         << getPilotCount() << "\n"
         << getStewardCount() << "\n"
-        << getCargoWeight();
+        << getCargoWeight() << "\n";
     return out;
 }
 
@@ -43,6 +45,7 @@ std::istream &CargoPlane::get(std::istream &in) {
     CargoPlane::setId(id);
     CargoPlane::setManufacturer(manuf);
     CargoPlane::setBrand(brand);
+    CargoPlane::setRunwayLength(std::stoi(rLength));
     CargoPlane::setFuelPerKilometer(std::stoi(fPerKilo));
     CargoPlane::setPilotCount(std::stoi(pCnt));
     CargoPlane::setStewardCount(std::stoi(sCnt));

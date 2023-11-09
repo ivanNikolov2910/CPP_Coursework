@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "../corp-data/Flight.h"
 
 class Plane {
 private:
@@ -14,6 +15,8 @@ private:
 public:
     Plane(const std::string &id, const std::string &manufacturer, const std::string &brand, int runwayLength,
           double fuelPerKilometer, int pilotCount, int stewardCount);
+
+    Plane() = default;
 
     virtual ~Plane();
 

@@ -1,4 +1,3 @@
-#include <string>
 #include "PassengerPlane.h"
 
 PassengerPlane::PassengerPlane(const std::string &id, const std::string &manufacturer, const std::string &brand,
@@ -10,6 +9,8 @@ PassengerPlane::PassengerPlane(const std::string &id, const std::string &manufac
     PassengerPlane::businessSeat = businessSeat;
     PassengerPlane::passengerSeat = passengerSeat;
 }
+
+PassengerPlane::~PassengerPlane() {}
 
 int PassengerPlane::getBusinessSeat() const {
     return businessSeat;
@@ -28,7 +29,8 @@ void PassengerPlane::setPassengerSeat(int passengerSeat) {
 }
 
 std::ostream &PassengerPlane::put(std::ostream &out) const {
-    out << getId() << "\n"
+    out << passenger << "\n"
+        << getId() << "\n"
         << getManufacturer() << "\n"
         << getBrand() << "\n"
         << getRunwayLength() << "\n"
@@ -36,7 +38,7 @@ std::ostream &PassengerPlane::put(std::ostream &out) const {
         << getPilotCount() << "\n"
         << getStewardCount() << "\n"
         << getBusinessSeat() << "\n"
-        << getPassengerSeat();
+        << getPassengerSeat() << "\n";
     return out;
 }
 
@@ -55,6 +57,7 @@ std::istream &PassengerPlane::get(std::istream &in) {
     PassengerPlane::setId(id);
     PassengerPlane::setManufacturer(manuf);
     PassengerPlane::setBrand(brand);
+    PassengerPlane::setRunwayLength(std::stoi(rLength));
     PassengerPlane::setFuelPerKilometer(std::stoi(fPerKilo));
     PassengerPlane::setPilotCount(std::stoi(pCnt));
     PassengerPlane::setStewardCount(std::stoi(sCnt));

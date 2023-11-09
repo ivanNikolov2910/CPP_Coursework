@@ -1,4 +1,3 @@
-#include <string>
 #include "Staff.h"
 
 Staff::Staff(const std::string &id, const std::string &name, const std::string &family, StaffPosition position,

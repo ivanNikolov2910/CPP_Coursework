@@ -1,4 +1,3 @@
-#include <string>
 #include "Runway.h"
 
 Runway::Runway(const std::string &id, int length) {

@@ -3,6 +3,7 @@
 #define COURSEWORK_STAFF_H
 
 #include <iostream>
+#include <string>
 
 enum StaffPosition {
     pilot = 0, steward = 1
@@ -18,7 +19,7 @@ public:
     Staff(const std::string &id, const std::string &name, const std::string &family, StaffPosition position,
           double salary);
 
-    Staff();
+    Staff() = default;
 
     virtual ~Staff();
 

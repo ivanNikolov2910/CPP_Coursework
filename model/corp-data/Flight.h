@@ -1,6 +1,9 @@
 #ifndef COURSEWORK_FLIGHT_H
 #define COURSEWORK_FLIGHT_H
 
+#include <string>
+#include "../../constants/constants.h"
+
 ResultCode validateDestination(const std::string &);
 
 enum Type {
@@ -16,7 +19,7 @@ private:
 public:
     Flight(Type type, std::string id, std::string destination, unsigned time, unsigned distance);
 
-    Flight();
+    Flight() = default;
 
     virtual ~Flight();
 

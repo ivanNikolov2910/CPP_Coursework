@@ -1,8 +1,8 @@
 #include <iostream>
-#include "engine/FlightEngine.cpp"
-#include "engine/PlaneEngine.cpp"
-#include "engine/StaffEngine.cpp"
-#include "engine/RunwayEngine.cpp"
+#include "engine/FlightEngine.h"
+#include "engine/PlaneEngine.h"
+#include "engine/StaffEngine.h"
+#include "engine/RunwayEngine.h"
 
 int main() {
     char cmd;

@@ -1,5 +1,3 @@
-#include <string>
-#include "../../constants/constants.h"
 #include "Flight.h"
 
 Flight::Flight(Type type, std::string id, std::string destination, unsigned time, unsigned distance) {

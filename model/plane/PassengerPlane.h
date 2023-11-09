@@ -1,7 +1,6 @@
 #ifndef COURSEWORK_PASSENGERPLANE_H
 #define COURSEWORK_PASSENGERPLANE_H
 
-#include <iostream>
 #include "Plane.h"
 
 class PassengerPlane : public Plane {
@@ -11,6 +10,10 @@ private:
 public:
     PassengerPlane(const std::string &id, const std::string &manufacturer, const std::string &brand, int runwayLength,
                    double fuelPerKilometer, int pilotCount, int stewardCount, int businessSeat, int passengerSeat);
+
+    PassengerPlane() = default;
+
+    virtual ~PassengerPlane();
 
     int getBusinessSeat() const;
 

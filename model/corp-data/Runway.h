@@ -3,6 +3,7 @@
 #define COURSEWORK_RUNWAY_H
 
 #include <iostream>
+#include <string>
 
 class Runway {
 private:
@@ -11,6 +12,8 @@ private:
 
 public:
     Runway(const std::string &id, int length);
+
+    Runway() = default;
 
     virtual ~Runway();
 
