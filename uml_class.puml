@@ -1,0 +1,205 @@
+@startuml
+
+class Staff {
+    - id: std::string
+    - name: std::string
+    - family: std::string
+    - position: StaffPosition
+    - salary: double
+    + Staff(id: const std::string&, name: const std::string&, family: const std::string&, position: StaffPosition, salary: double)
+    + ~Staff()
+    + getId(): const std::string&
+    + setId(id: const std::string&): void
+    + getName(): const std::string&
+    + setName(name: const std::string&): void
+    + getFamily(): const std::string&
+    + setFamily(family: const std::string&): void
+    + getPosition(): StaffPosition
+    + setPosition(position: StaffPosition): void
+    + getSalary(): double
+    + setSalary(salary: double): void
+    + operator==(other: const Staff&): bool
+    + friend <<(out: std::ostream&, obj: const Staff&): std::ostream&
+    + friend >>(in: std::istream&, obj: Staff&): std::istream&
+}
+
+enum StaffPosition {
+    pilot = 0
+    steward = 1
+}
+
+Staff <|- StaffPosition : as value type
+
+
+class Plane {
+    - id: std::string
+    - manufacturer: std::string
+    - brand: std::string
+    - runwayLength: int
+    - fuelPerKilometer: double
+    - pilotCount: int
+    - stewardCount: int
+    + Plane(id: const std::string&, manufacturer: const std::string&, brand: const std::string&, runwayLength: int, fuelPerKilometer: double, pilotCount: int, stewardCount: int)
+    + ~Plane()
+    + getId(): const std::string&
+    + getManufacturer(): const std::string&
+    + getBrand(): const std::string&
+    + getRunwayLength(): int
+    + getFuelPerKilometer(): double
+    + getPilotCount(): int
+    + getStewardCount(): int
+    + setId(id: const std::string&): void
+    + setManufacturer(manufacturer: const std::string&): void
+    + setBrand(brand: const std::string&): void
+    + setRunwayLength(runwayLength: int): void
+    + setFuelPerKilometer(fuelPerKilometer: double): void
+    + setPilotCount(pilotCount: int): void
+    + setStewardCount(stewardCount: int): void
+    + operator==(other: const Plane&): bool
+    + friend <<(out: std::ostream&, obj: const Plane&): std::ostream&
+    + friend >>(in: std::istream&, obj: Plane&): std::istream&
+}
+
+class PassengerPlane {
+    - businessSeat: int
+    - passengerSeat: int
+    + PassengerPlane(id: const std::string&, manufacturer: const std::string&, brand: const std::string&, runwayLength: int, fuelPerKilometer: double, pilotCount: int, stewardCount: int, businessSeat: int, passengerSeat: int)
+    + ~PassengerPlane()
+    + getBusinessSeat(): int
+    + getPassengerSeat(): int
+    + setBusinessSeat(businessSeat: int): void
+    + setPassengerSeat(passengerSeat: int): void
+    + put(out: std::ostream&): std::ostream&
+    + get(in: std::istream&): std::istream&
+}
+
+PassengerPlane --|> Plane
+
+class CargoPlane {
+    - cargoWeight: int
+    + CargoPlane(id: const std::string&, manufacturer: const std::string&, brand: const std::string&, runwayLength: int, fuelPerKilometer: double, pilotCount: int, stewardCount: int, cargoWeight: int)
+    + ~CargoPlane()
+    + getCargoWeight(): int
+    + setCargoWeight(cargoWeight: int): void
+    + put(out: std::ostream&): std::ostream&
+    + get(in: std::istream&): std::istream&
+}
+
+CargoPlane --|> Plane
+
+
+enum Type {
+    cargo = 0
+    passenger = 1
+}
+
+class Flight {
+    - id: std::string
+    - destination: std::string
+    - time: unsigned int
+    - distance: unsigned int
+    - type: Type
+    + Flight(type: Type, id: const std::string&, destination: const std::string&, time: unsigned, distance: unsigned)
+    + ~Flight()
+    + validateDestination(destination: const std::string&): ResultCode
+    + getId(): const std::string&
+    + getDestination(): const std::string&
+    + setDestination(destination: const std::string&): void
+    + getTime(): unsigned int
+    + setTime(time: unsigned int): void
+    + getDistance(): unsigned int
+    + setDistance(distance: unsigned int): void
+    + getType(): Type
+    + operator==(other: const Flight&): bool
+    + friend <<(out: std::ostream&, obj: const Flight&): std::ostream&
+    + friend >>(in: std::istream&, obj: Flight&): std::istream&
+}
+
+Flight <|- Type : as value type
+
+
+class StaffUtils {
+    + readStaffData(const std::vector<Staff> &): Staff
+    + appendStaffToFile(const std::vector<Staff> &): ResultCode
+    + updateStaffData(Staff &): ResultCode
+    + rewriteStaff(const std::vector<Staff> &): ResultCode
+    + ListStaff(std::vector<Staff> &): ResultCode
+    + CreateStaff(unsigned): ResultCode
+    + UpdateStaff(const std::string &id): ResultCode
+    + DeleteStaff(const std::string &id): ResultCode
+}
+
+Staff <-- StaffUtils: Uses
+
+
+class Runway {
+    -id: string
+    -length: int
+    +getId(): string
+    +getLength(): int
+    +setId(id: string): void
+    +setLength(length: int): void
+}
+
+class RunwayUtils {
+    + readRunwayData(const std::vector<Runway> &): Runway
+    + appendRunwayToFile(const std::vector<Runway> &): ResultCode
+    + rewriteRunway(const std::vector<Runway> &): ResultCode
+    + ListRunway(std::vector<Runway> &): ResultCode
+    + CreateRunway(): ResultCode
+    + DeleteRunway(const std::string &id): ResultCode
+}
+
+Runway -- RunwayUtils : Uses
+
+
+class PlaneUtils {
+    + readPlaneData(const std::vector<Plane *> &): Plane*
+    + appendPlanesToFile(const std::vector<Plane *> &): ResultCode
+    + rewritePlanes(const std::vector<Plane *> &): ResultCode
+    + ListPlanes(std::vector<Plane *> &): ResultCode
+    + CreatePlanes(int): ResultCode
+    + DeletePlane(const std::string &id): ResultCode
+}
+
+Plane <-- PlaneUtils : Uses
+
+
+class FlightUtils {
+    + readFlightData(const std::vector<Flight> &): Flight
+    + appendFlightsToFile(const std::vector<Flight> &): ResultCode
+    + updateFlightData(Flight &): ResultCode
+    + rewriteFlights(const std::vector<Flight> &): ResultCode
+    + ListFlights(std::vector<Flight> &): ResultCode
+    + CreateFlights(unsigned): ResultCode
+    + UpdateFlights(const std::string &id): ResultCode
+    + DeleteFlights(const std::string &id): ResultCode
+}
+
+Flight <-- FlightUtils : Uses
+
+
+class Constants {
+    - FLIGHT_ID_PATTERN: std::regex
+    - PLANE_ID_PATTERN: std::regex
+    - BASE_CITY_NAME: std::regex
+    - FLIGHT_FILE_PATH: std::string
+    - PLANE_FILE_PATH: std::string
+    - RUNWAY_FILE_PATH: std::string
+    - STAFF_FILE_PATH: std::string
+    - ASSIGN_FLIGHTS_FILE_PATH: std::string
+    + instanceof(const T*): bool
+}
+
+enum ResultCode {
+    success
+    validation_error
+    internal_error
+    not_found_error
+}
+
+Constants "1" -- "1..*" ResultCode: Contains
+
+
+
+@enduml
