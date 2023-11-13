@@ -13,7 +13,7 @@ class Staff {
 private:
     std::string id, name, family;
     StaffPosition position;
-    double salary;
+    double salary{};
 
 public:
     Staff(const std::string &id, const std::string &name, const std::string &family, StaffPosition position,

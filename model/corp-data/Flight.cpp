@@ -1,6 +1,6 @@
 #include "Flight.h"
 
-Flight::Flight(Type type, std::string id, std::string destination, unsigned time, unsigned distance) {
+Flight::Flight(Type type, const std::string &id, const std::string &destination, unsigned time, unsigned distance) {
     Flight::type = type;
     Flight::id = id;
     Flight::time = time;

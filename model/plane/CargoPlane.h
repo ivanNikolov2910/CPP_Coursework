@@ -5,7 +5,7 @@
 
 class CargoPlane : public Plane {
 private:
-    int cargoWeight;
+    int cargoWeight{};
 
 public:
     CargoPlane(const std::string &id, const std::string &manufacturer, const std::string &brand, int runwayLength,
@@ -13,7 +13,7 @@ public:
 
     CargoPlane() = default;
 
-    virtual ~CargoPlane();
+    ~CargoPlane() override;
 
     int getCargoWeight() const;
 

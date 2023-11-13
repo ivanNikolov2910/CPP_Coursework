@@ -1,13 +1,13 @@
 #include "CargoPlane.h"
 
 CargoPlane::CargoPlane(const std::string &id, const std::string &manufacturer, const std::string &brand,
-                       int runwayLength,
-                       double fuelPerKilometer, int pilotCount, int stewardCount, int cargoWeight)
+                       int runwayLength, double fuelPerKilometer, int pilotCount, int stewardCount,
+                       int cargoWeight)
         : Plane(id, manufacturer, brand, runwayLength, fuelPerKilometer, pilotCount, stewardCount) {
     CargoPlane::cargoWeight = cargoWeight;
 }
 
-CargoPlane::~CargoPlane() {}
+CargoPlane::~CargoPlane() = default;
 
 int CargoPlane::getCargoWeight() const {
     return cargoWeight;

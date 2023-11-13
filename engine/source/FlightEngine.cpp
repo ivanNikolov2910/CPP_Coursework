@@ -51,6 +51,7 @@ void ManageFlights() {
                 res = ListFlights(flights);
                 if (res != success) {
                     std::cout << "Could not list flights" << std::endl;
+                    break;
                 }
                 std::cout << flights.capacity() << "\n";
                 std::cout << flights.size() << "\n";
@@ -65,11 +66,13 @@ void ManageFlights() {
                 res = ListFlights(flights);
                 if (res != success) {
                     std::cout << "Could not list flights" << std::endl;
+                    break;
                 }
                 if (!flights.empty()) {
                     res = FlightsManagingOptions(flights);
                     if (res != success) {
                         std::cout << "Changes are not saved" << std::endl;
+                        break;
                     }
                 } else {
                     std::cout << "No flights for detailed options" << std::endl;

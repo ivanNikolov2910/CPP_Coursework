@@ -7,11 +7,12 @@ ResultCode ListFlights(std::vector<Flight> &flights) {
         return internal_error;
     }
 
-    Flight *newFlight = new Flight;
-    while (file >> *newFlight) {
-        flights.push_back(*newFlight);
+    Flight newFlight;
+    while (file >> newFlight) {
+        flights.push_back(newFlight);
     }
 
+    file.close();
     return success;
 }
 
@@ -20,11 +21,11 @@ ResultCode CreateFlights(unsigned count) {
     ResultCode res = ListFlights(flights);
     if (res != success) {
         std::cout << "Could not fetch flights" << std::endl;
+        return not_found_error;
     }
 
     for (unsigned i = 0; i < count; ++i) {
-        Flight newFlight = readFlightData(flights);
-        flights.push_back(newFlight);
+        flights.push_back(readFlightData(flights));
     }
 
     if (appendFlightsToFile(flights) != success) {
@@ -40,52 +41,46 @@ ResultCode UpdateFlights(const std::string &id) {
     std::vector<Flight> flights;
     ResultCode res = ListFlights(flights);
     if (res != success) {
-        std::cout << "Failed to list flights" << std::endl;
-        return internal_error;
-    }
-
-    Flight *flightToUpdate;
-    for (Flight &flight: flights) {
-        if (flight.getId() == id) {
-            flightToUpdate = &flight;
-        }
-    }
-
-    if (flightToUpdate == nullptr) {
-        std::cout << "Flight with ID " << id << " not found." << std::endl;
+        std::cout << "Could not fetch flights" << std::endl;
         return not_found_error;
     }
 
-    if (updateFlightData(*flightToUpdate) != success) {
-        std::cout << "Update failed." << std::endl;
-        return validation_error;
+    auto it = std::find_if(flights.begin(), flights.end(),
+                           [&id](const Flight &flight) {
+                               return flight.getId() == id;
+                           });
+
+    if (it != flights.end()) {
+        if (updateFlightData(*it) != success) {
+            std::cout << "Update failed." << std::endl;
+            return validation_error;
+        }
+        return rewriteFlights(flights);
     }
 
-    return rewriteFlights(flights);
+    std::cout << "Flight with ID " << id << " not found." << std::endl;
+    return not_found_error;
 }
 
 ResultCode DeleteFlights(const std::string &id) {
     std::vector<Flight> flights;
     ResultCode res = ListFlights(flights);
     if (res != success) {
-        std::cout << "Failed to fetch flights" << std::endl;
-        return internal_error;
+        std::cout << "Could not fetch flights" << std::endl;
+        return not_found_error;
     }
 
-    int toDelete = -1;
-    for (int i = 0; i < flights.capacity(); ++i) {
-        if (flights.at(i).getId() == id) {
-            toDelete = i;
-            break;
-        }
-    }
+    auto it = std::find_if(flights.begin(), flights.end(),
+                           [&id](const Flight &flight) {
+                               return flight.getId() == id;
+                           });
 
-    std::cout << toDelete;
-    if (toDelete != -1) {
-        flights.erase(flights.begin() + toDelete);
+    if (it != flights.end()) {
+        flights.erase(it);
         return rewriteFlights(flights);
     }
-    std::cout << "Could not find corp-data with id: " << id << std::endl;
+
+    std::cout << "Could not find flight with id: " << id << std::endl;
     return internal_error;
 }
 

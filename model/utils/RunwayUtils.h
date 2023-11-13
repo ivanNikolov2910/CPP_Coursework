@@ -10,8 +10,6 @@ Runway readRunwayData(const std::vector<Runway> &);
 
 ResultCode appendRunwayToFile(const std::vector<Runway> &);
 
-ResultCode updateRunwayData(Runway &);
-
 ResultCode rewriteRunway(const std::vector<Runway> &runway);
 
 

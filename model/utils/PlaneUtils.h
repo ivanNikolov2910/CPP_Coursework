@@ -14,7 +14,7 @@ ResultCode appendPlanesToFile(const std::vector<Plane *> &);
 ResultCode rewritePlanes(const std::vector<Plane *> &);
 
 
-ResultCode ListPlanes(std::vector<Plane *> *planes);
+ResultCode ListPlanes(std::vector<Plane *> &planes);
 
 ResultCode CreatePlanes(int);
 

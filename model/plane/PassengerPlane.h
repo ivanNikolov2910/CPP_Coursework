@@ -5,7 +5,7 @@
 
 class PassengerPlane : public Plane {
 private:
-    int businessSeat, passengerSeat;
+    int businessSeat{}, passengerSeat{};
 
 public:
     PassengerPlane(const std::string &id, const std::string &manufacturer, const std::string &brand, int runwayLength,
@@ -13,7 +13,7 @@ public:
 
     PassengerPlane() = default;
 
-    virtual ~PassengerPlane();
+    ~PassengerPlane() override;
 
     int getBusinessSeat() const;
 

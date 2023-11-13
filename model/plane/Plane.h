@@ -8,9 +8,9 @@
 class Plane {
 private:
     std::string id, manufacturer, brand;
-    int runwayLength;
-    double fuelPerKilometer;
-    int pilotCount, stewardCount;
+    int runwayLength{};
+    double fuelPerKilometer{};
+    int pilotCount{}, stewardCount{};
 
 public:
     Plane(const std::string &id, const std::string &manufacturer, const std::string &brand, int runwayLength,

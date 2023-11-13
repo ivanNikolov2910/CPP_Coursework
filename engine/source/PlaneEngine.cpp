@@ -44,7 +44,7 @@ void ManagePlanes() {
                 break;
             case '3':
                 std::cout << "List of planes:" << std::endl;
-                res = ListPlanes(&planes);
+                res = ListPlanes(planes);
 
                 if (res != success) {
                     std::cout << "Failed to list planes." << std::endl;

@@ -1,16 +1,14 @@
 #include "PassengerPlane.h"
 
 PassengerPlane::PassengerPlane(const std::string &id, const std::string &manufacturer, const std::string &brand,
-                               int runwayLength,
-                               double fuelPerKilometer, int pilotCount, int stewardCount, int businessSeat,
-                               int passengerSeat)
+                               int runwayLength, double fuelPerKilometer, int pilotCount, int stewardCount,
+                               int businessSeat, int passengerSeat)
         : Plane(id, manufacturer, brand, runwayLength, fuelPerKilometer, pilotCount, stewardCount) {
-
     PassengerPlane::businessSeat = businessSeat;
     PassengerPlane::passengerSeat = passengerSeat;
 }
 
-PassengerPlane::~PassengerPlane() {}
+PassengerPlane::~PassengerPlane() = default;
 
 int PassengerPlane::getBusinessSeat() const {
     return businessSeat;

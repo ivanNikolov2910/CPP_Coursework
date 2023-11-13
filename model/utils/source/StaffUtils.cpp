@@ -7,11 +7,12 @@ ResultCode ListStaff(std::vector<Staff> &staff) {
         return internal_error;
     }
 
-    Staff *newStaff = new Staff();
-    while (file >> *newStaff) {
-        staff.push_back(*newStaff);
+    Staff newStaff;
+    while (file >> newStaff) {
+        staff.push_back(newStaff);
     }
 
+    file.close();
     return success;
 }
 
@@ -19,17 +20,18 @@ ResultCode CreateStaff(unsigned count) {
     std::vector<Staff> staff;
     ResultCode res = ListStaff(staff);
     if (res != success) {
-        std::cout << "Could not fetch flights" << std::endl;
+        std::cout << "Could not fetch staff" << std::endl;
+        return internal_error;
     }
 
     for (unsigned i = 0; i < count; ++i) {
-        Staff newStaff = readStaffData(staff);
-        staff.push_back(newStaff);
+        staff.push_back(readStaffData(staff));
     }
 
-    if (appendStaffToFile(staff) != success) {
+    res = appendStaffToFile(staff);
+    if (res != success) {
         std::cout << "Failed to write staff to the file." << std::endl;
-        return internal_error;
+        return res;
     }
 
     std::cout << "Staff added successfully." << std::endl;

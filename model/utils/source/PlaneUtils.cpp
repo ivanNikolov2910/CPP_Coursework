@@ -1,39 +1,40 @@
 #include "../PlaneUtils.h"
 
-ResultCode ListPlanes(std::vector<Plane *> *planes) {
+ResultCode ListPlanes(std::vector<Plane *> &planes) {
     std::ifstream file(PLANE_FILE_PATH);
     if (!file) {
         std::cout << "Failed to open the file." << std::endl;
         return internal_error;
     }
 
-    Plane *abstractPlane;
     int planeType;
     while (file >> planeType) {
+        Plane *abstractPlane = nullptr;
         if (static_cast<Type>(planeType) == cargo) {
             abstractPlane = new CargoPlane();
-            file >> *abstractPlane;
-        }
-        if (static_cast<Type>(planeType) == passenger) {
+        } else if (static_cast<Type>(planeType) == passenger) {
             abstractPlane = new PassengerPlane();
-            file >> *abstractPlane;
         }
-        planes->push_back(abstractPlane);
+        if (abstractPlane) {
+            file >> *abstractPlane;
+            planes.push_back(abstractPlane);
+        }
     }
 
+    file.close();
     return success;
 }
 
 ResultCode CreatePlanes(int count) {
     std::vector<Plane *> planes;
-    ResultCode res = ListPlanes(&planes);
+    ResultCode res = ListPlanes(planes);
     if (res != success) {
         std::cout << "Could not fetch planes" << std::endl;
+        return not_found_error;
     }
 
     for (int i = 0; i < count; ++i) {
-        Plane *newPlane = readPlaneData(planes);
-        planes.push_back(newPlane);
+        planes.push_back(readPlaneData(planes));
     }
 
     if (appendPlanesToFile(planes) != success) {
@@ -47,26 +48,24 @@ ResultCode CreatePlanes(int count) {
 
 ResultCode DeletePlane(const std::string &id) {
     std::vector<Plane *> planes;
-    ResultCode res = ListPlanes(&planes);
+    ResultCode res = ListPlanes(planes);
     if (res != success) {
-        std::cout << "Failed to fetch flights" << std::endl;
-        return internal_error;
-    }
-    int toDelete = -1;
-    for (int i = 0; i < planes.capacity(); ++i) {
-        if (planes.at(i)->getId() == id) {
-            toDelete = i;
-            break;
-        }
+        std::cout << "Could not fetch planes" << std::endl;
+        return not_found_error;
     }
 
-    std::cout << toDelete;
-    if (toDelete != -1) {
-        planes.erase(planes.begin() + toDelete);
+    auto it = std::find_if(planes.begin(), planes.end(),
+                           [&id](Plane *plane) {
+                               return plane->getId() == id;
+                           });
+
+    if (it != planes.end()) {
+        planes.erase(it);
         return rewritePlanes(planes);
     }
-    std::cout << "Could not find corp-data with id: " << id << std::endl;
-    return internal_error;
+
+    std::cout << "Could not find plane with id: " << id << std::endl;
+    return not_found_error;
 }
 
 Plane *readPlaneData(const std::vector<Plane *> &planes) {
@@ -159,39 +158,32 @@ Plane *readPlaneData(const std::vector<Plane *> &planes) {
 }
 
 ResultCode appendPlanesToFile(const std::vector<Plane *> &planes) {
-    std::fstream file;
-    file.open(PLANE_FILE_PATH, std::fstream::app);
-
+    std::ofstream file(PLANE_FILE_PATH, std::ios::app);
     if (!file) {
         std::cout << "Failed to open the file." << std::endl;
         return internal_error;
     }
 
     for (const Plane *plane: planes) {
-        file << *plane;
+        file << *plane << '\n';
     }
 
     file.close();
-
     return success;
 }
 
 ResultCode rewritePlanes(const std::vector<Plane *> &planes) {
-    std::ofstream file;
-    file.open(PLANE_FILE_PATH);
-
+    std::ofstream file(PLANE_FILE_PATH);
     if (!file) {
         std::cout << "Failed to open the file." << std::endl;
         return internal_error;
     }
 
-    for (Plane *plane: planes) {
-        file << *plane;
+    for (const Plane *plane: planes) {
+        file << *plane << '\n';
     }
 
     file.close();
     std::cout << "Planes are updated successfully." << std::endl;
     return success;
 }
-
-

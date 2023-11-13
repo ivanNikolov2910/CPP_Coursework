@@ -14,12 +14,12 @@
 
 struct ResultData {
     ResultCode res = not_found_error;
-    Runway *runway{};
+    Runway runway;
     Plane *plane{};
 
     ResultData() = default;
 
-    ResultData(ResultCode res, Runway *runway, Plane *plane) {
+    ResultData(ResultCode res, const Runway &runway, Plane *plane) {
         this->res = res;
         this->runway = runway;
         this->plane = plane;

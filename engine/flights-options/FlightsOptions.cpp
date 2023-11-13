@@ -17,7 +17,7 @@ ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
         return internal_error;
     }
 
-    res = ListPlanes(&planes);
+    res = ListPlanes(planes);
     if (res != success) {
         std::cout << "No planes found to list" << std::endl;
         return internal_error;
@@ -84,15 +84,17 @@ ResultCode FlightsManagingOptions(std::vector<Flight> &flights) {
                         resultData = recommendedPlanesByFlight(planes, f, runways);
 
                         if (resultData && resultData->res == success) {
-                            std::cout << "Recommended Plane: " << resultData->plane << " on Runway: "
-                                      << resultData->runway << std::endl;
+                            std::cout << "Recommended Plane: " << *resultData->plane << "\n"
+                                      << "on Runway: " << resultData->runway << std::endl;
 
                             std::cout << "Do you want to assign this plane: [y/n]";
                             std::cin >> cmd;
                             if (cmd == 'y') {
                                 std::fstream file(ASSIGN_FLIGHTS_FILE_PATH, std::fstream::app);
                                 if (file) {
-                                    file << resultData->plane << f << resultData->runway << "\n";
+                                    file << *resultData->plane << "\n"
+                                         << f << "\n"
+                                         << resultData->runway << "\n";
                                     file.close();
                                 } else {
                                     std::cout << "Failed to open the file." << std::endl;
@@ -157,7 +159,7 @@ ResultData *recommendedPlanesByFlight(const std::vector<Plane *> &planes, const 
     for (Plane *p: planes) {
         double totalExpense = calculateExpensesForFlight(*p, flight);
 
-        for (Runway r: runways) {
+        for (const Runway &r: runways) {
             int runwayLengthDiff = p->getRunwayLength() - r.getLength();
 
             if (runwayLengthDiff >= 0 && totalExpense < minExpense) {
@@ -168,10 +170,10 @@ ResultData *recommendedPlanesByFlight(const std::vector<Plane *> &planes, const 
                     result->plane = dynamic_cast<PassengerPlane *>(p);
                 } else {
                     delete result;
-                    return new ResultData(internal_error, nullptr, nullptr);
+                    return new ResultData(internal_error, {}, nullptr);
                 }
                 result->res = success;
-                result->runway = &r;
+                result->runway = r;
             }
         }
     }

@@ -38,6 +38,7 @@ void ManageRunways() {
                 res = ListRunway(runways);
                 if (res != success) {
                     std::cout << "Changes are not saved" << std::endl;
+                    break;
                 }
                 for (Runway &r: runways) {
                     std::cout << "Runway: " << std::endl;

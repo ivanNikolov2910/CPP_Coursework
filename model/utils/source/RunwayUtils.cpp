@@ -1,31 +1,34 @@
 #include "../RunwayUtils.h"
 
-ResultCode ListRunway(std::vector<Runway> &runway) {
+
+ResultCode ListRunway(std::vector<Runway> &runways) {
     std::ifstream file(RUNWAY_FILE_PATH);
     if (!file) {
         std::cout << "Failed to open the file." << std::endl;
         return internal_error;
     }
 
-    Runway *newRunway = new Runway();
-    while (file >> *newRunway) {
-        runway.push_back(*newRunway);
+    Runway newRunway;
+    while (file >> newRunway) {
+        runways.push_back(newRunway);
     }
-
+    file.close();
     return success;
 }
 
 ResultCode CreateRunway() {
-    std::vector<Runway> runway;
-    ResultCode res = ListRunway(runway);
+    std::vector<Runway> runways;
+    ResultCode res = ListRunway(runways);
     if (res != success) {
         std::cout << "Could not fetch runways" << std::endl;
+        return internal_error;
     }
 
-    Runway newRunway = readRunwayData(runway);
-    runway.push_back(newRunway);
+    Runway newRunway = readRunwayData(runways);
+    runways.push_back(newRunway);
 
-    if (appendRunwayToFile(runway) != success) {
+    res = appendRunwayToFile(runways);
+    if (res != success) {
         std::cout << "Failed to write runway to the file." << std::endl;
         return internal_error;
     }
@@ -35,50 +38,45 @@ ResultCode CreateRunway() {
 }
 
 ResultCode DeleteRunway(const std::string &id) {
-    std::vector<Runway> runway;
-    ResultCode res = ListRunway(runway);
+    std::vector<Runway> runways;
+    ResultCode res = ListRunway(runways);
     if (res != success) {
-        std::cout << "Failed to fetch staff" << std::endl;
+        std::cout << "Failed to fetch runways" << std::endl;
         return internal_error;
     }
 
-    int toDelete = -1;
-    for (int i = 0; i < runway.capacity(); ++i) {
-        if (runway.at(i).getId() == id) {
-            toDelete = i;
-            break;
-        }
+    auto it = std::find_if(runways.begin(), runways.end(),
+                           [&id](const Runway &r) {
+                               return r.getId() == id;
+                           });
+
+    if (it != runways.end()) {
+        runways.erase(it);
+        return rewriteRunway(runways);
     }
 
-    std::cout << toDelete;
-    if (toDelete != -1) {
-        runway.erase(runway.begin() + toDelete);
-        return rewriteRunway(runway);
-    }
     std::cout << "Could not find runway with id: " << id << std::endl;
-    return internal_error;
+    return not_found_error;
 }
 
-ResultCode rewriteRunway(const std::vector<Runway> &runway) {
+ResultCode rewriteRunway(const std::vector<Runway> &runways) {
     std::ofstream file;
     file.open(RUNWAY_FILE_PATH);
-
     if (!file) {
         std::cout << "Failed to open the file." << std::endl;
         return internal_error;
     }
 
-    for (const Runway &s: runway) {
-        file << s;
+    for (const Runway &r: runways) {
+        file << r;
     }
 
     file.close();
-    std::cout << "Flights updated successfully." << std::endl;
+    std::cout << "Runways updated successfully." << std::endl;
     return success;
 }
 
-
-Runway readRunwayData(const std::vector<Runway> &runway) {
+Runway readRunwayData(const std::vector<Runway> &runways) {
     std::string id;
     int length;
 
@@ -86,26 +84,20 @@ Runway readRunwayData(const std::vector<Runway> &runway) {
         std::cout << "Enter runway id: ";
         std::cin >> id;
 
-        bool shouldRestart = false;
-        for (const Runway &r: runway) {
-            if (r.getId() == id) {
-                std::cout << "Staff id already exists" << std::endl;
-                shouldRestart = true;
-                break;
-            }
+        if (std::find_if(runways.begin(), runways.end(),
+                         [&id](const Runway &r) {
+                             return r.getId() == id;
+                         }) != runways.end()) {
+            std::cout << "Runway id already exists" << std::endl;
+        } else {
+            break;
         }
-
-        if (shouldRestart) {
-            continue;
-        }
-        break;
     }
 
     std::cout << "Enter runway length: ";
     std::cin >> length;
 
-
-    return *new Runway(id, length);
+    return {id, length};
 }
 
 ResultCode appendRunwayToFile(const std::vector<Runway> &runway) {
@@ -122,36 +114,6 @@ ResultCode appendRunwayToFile(const std::vector<Runway> &runway) {
     }
 
     file.close();
-
-    return success;
-}
-
-ResultCode updateRunwayData(Runway &runway) {
-    char cmd;
-    std::string id;
-    int length;
-
-    std::cout << "Enter field index to update: " << "\n"
-              << "1. Id" << "\n"
-              << "2. Length" << "\n"
-              << "3. Discard changes" << "\n";
-    std::cin >> cmd;
-
-    switch (cmd) {
-        case '1':
-            std::cin >> id;
-            runway.setId(id);
-            break;
-        case '2':
-            std::cin >> length;
-            runway.setLength(length);
-            break;
-        case '3':
-            return success;
-        default:
-            std::cout << "Invalid operation index, update staff" << std::endl;
-            return validation_error;
-    }
 
     return success;
 }

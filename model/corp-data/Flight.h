@@ -14,10 +14,10 @@ enum Type {
 class Flight {
 private:
     std::string id, destination;
-    unsigned time, distance;
+    unsigned time{}, distance{};
     Type type;
 public:
-    Flight(Type type, std::string id, std::string destination, unsigned time, unsigned distance);
+    Flight(Type type, const std::string &id, const std::string &destination, unsigned time, unsigned distance);
 
     Flight() = default;
 

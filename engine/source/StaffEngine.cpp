@@ -20,7 +20,6 @@ void ManageStaff() {
 
         switch (cmd) {
             case '1':
-                count = 1;
                 std::cout << "Enter count of staff to create" << std::endl;
                 std::cin >> count;
                 res = CreateStaff(count);
@@ -50,6 +49,7 @@ void ManageStaff() {
                 res = ListStaff(staff);
                 if (res != success) {
                     std::cout << "Changes are not saved" << std::endl;
+                    break;
                 }
                 for (Staff &s: staff) {
                     std::cout << "Staff: " << std::endl;

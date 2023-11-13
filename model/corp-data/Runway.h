@@ -9,7 +9,7 @@
 class Runway {
 private:
     std::string id;
-    int length;
+    int length{};
 
 public:
     Runway(const std::string &id, int length);
