@@ -33,6 +33,9 @@ ResultCode assignPlane(const Flight &, const std::vector<Plane *> &, const std::
 ResultData *
 recommendedPlanesByFlight(const std::vector<Plane *> &, const Flight &, const std::vector<Runway> &);
 
+ResultCode
+applicablePlanesPerFlight(const std::vector<Plane *> &, const Flight &, const Runway &, std::vector<Plane *> *out);
+
 ResultCode FlightsManagingOptions(std::vector<Flight> &);
 
 #endif //COURSEWORK_FLIGHTOPTIONS_H

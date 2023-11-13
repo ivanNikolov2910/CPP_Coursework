@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 class Runway {
 private:
@@ -44,6 +45,8 @@ public:
         in >> obj.length;
         return in;
     }
+
+    static Runway *getRunwayById(const std::string &, std::vector<Runway> *);
 };
 
 

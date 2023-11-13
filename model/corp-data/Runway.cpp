@@ -1,3 +1,4 @@
+#include <regex>
 #include "Runway.h"
 
 Runway::Runway(const std::string &id, int length) {
@@ -21,4 +22,13 @@ int Runway::getLength() const {
 
 void Runway::setLength(int length) {
     Runway::length = length;
+}
+
+Runway* Runway::getRunwayById(const std::string &id, std::vector<Runway> *runways) {
+    for (Runway &r: *runways) {
+        if (r.getId() == id){
+            return &r;
+        }
+    }
+    return nullptr;
 }
